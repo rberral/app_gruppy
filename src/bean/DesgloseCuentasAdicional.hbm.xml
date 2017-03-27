@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23-mar-2017 23:45:22 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="bean.DesgloseCuentasAdicional" table="desglose_cuentas_adicional" catalog="proyecto_asociacion">
+        <id name="idAdicional" type="java.lang.Integer">
+            <column name="id_adicional" />
+            <generator class="identity" />
+        </id>
+        <property name="idLibro" type="int">
+            <column name="id_libro" not-null="true" />
+        </property>
+        <property name="idPersona" type="int">
+            <column name="id_persona" not-null="true" />
+        </property>
+        <property name="annoCuenta" type="int">
+            <column name="anno_cuenta" not-null="true" />
+        </property>
+        <property name="cuotaAdicional" type="int">
+            <column name="cuota_adicional" not-null="true" />
+        </property>
+        <property name="coste" type="int">
+            <column name="coste" not-null="true" />
+        </property>
+        <property name="pagado" type="boolean">
+            <column name="pagado" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

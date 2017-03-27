@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23-mar-2017 23:45:22 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="bean.Asociacion" table="asociacion" catalog="proyecto_asociacion">
+        <id name="idAsociacion" type="java.lang.Integer">
+            <column name="id_asociacion" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="65535" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="500" not-null="true" />
+        </property>
+        <property name="fechaFundacion" type="date">
+            <column name="fecha_fundacion" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

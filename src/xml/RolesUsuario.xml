@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<roles>
+	<rol>
+		<nombre>Presidente</nombre>
+		<valor>1</valor>
+	</rol>
+	<rol>
+		<nombre>Vicepresidente</nombre>
+		<valor>2</valor>
+	</rol>
+	<rol>
+		<nombre>Tesorero</nombre>
+		<valor>3</valor>
+	</rol>
+	<rol>
+		<nombre>Portavoz</nombre>
+		<valor>4</valor>
+	</rol>
+	<rol>
+		<nombre>Jefe Cocina</nombre>
+		<valor>5</valor>
+	</rol>
+	<rol>
+		<nombre>Hermano</nombre>
+		<valor>6</valor>
+	</rol>
+</roles>
