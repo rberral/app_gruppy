@@ -1,7 +1,9 @@
 package service;
 
+import java.util.Date;
 import java.util.List;
 //import java.util.logging.Logger;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -65,13 +67,15 @@ public class PersonaService implements IPersonaService {
 		return dao.updateProfilePerson(p,pOld);
 	}
 	
-	public boolean updatePersonaFundador(String email, boolean fundador){
-		return dao.updatePersonaFundador(email,fundador);
+	//Actualiza datos Persona -> Pestaña Socios
+	public boolean updatePersonaSocio(String email, boolean fundador, Date f_alta, boolean activo){
+		return dao.updatePersonaSocio(email,fundador, f_alta, activo);
 	}
 	
-	public boolean updatePersonaActivo(String email, boolean activo){
-		return dao.updatePersonaActivo(email,activo);
-	}
+	//Se controla en update
+//	public boolean updatePersonaActivo(String email, boolean activo){
+//		return dao.updatePersonaActivo(email,activo);
+//	}
 	
 	@Override
 	public List<Persona> listPersonas() {

@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -51,11 +52,27 @@ public class PruebasTest {
 	    cal.set( Calendar.SECOND, 0);
 	    cal.set( Calendar.MILLISECOND, 0);
 	    Date ff = cal.getTime();*/
+		/*
 		File f = new File(Constantes.URLMaestroRolXML);
 		System.out.println(f.getPath());
 		System.out.println(f.getAbsolutePath());
 		Document documento = null;
 		File f2 = new File(Constantes.URLMaestroRolXML);
+		*/
+
+		 Calendar calendar = Calendar.getInstance();
+		 calendar.set(9999, 11, 31);
+		// calendar.set(Calendar.HOUR_OF_DAY, 0);
+		 //calendar.clear(Calendar.MILLISECOND);
+		 Date fecha = calendar.getTime();
+		 //p.setFechaBaja(new Date(9999,12,31));
+		 System.out.println(fecha.toString());
+		 
+		 Calendar calendar2 = new GregorianCalendar(9999,11,31);
+		 Date d = calendar2.getTime();
+		 System.out.println(d.toString());
+
+		
 	}
 	
 

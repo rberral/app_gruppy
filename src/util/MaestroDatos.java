@@ -44,6 +44,14 @@ public class MaestroDatos {
 		return listado;
 	}
 	
+	public static Map<Boolean, String> getBooleanValuesSelect(){
+		Map<Boolean, String> listado = null;
+		listado = new HashMap<Boolean, String>();
+		listado.put(true, Constantes.BOOLEAN_TRUE);
+		listado.put(false,Constantes.BOOLEAN_FALSE);
+		
+		return listado;
+	}
 	
 	private static Document loadDocument(String nombreFicheroXML){
 		Document doc = null;
@@ -64,4 +72,5 @@ public class MaestroDatos {
 		}
 		return doc;
 	}
+	
 }

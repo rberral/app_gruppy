@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ControllerURL
  */
-public class ControllerURL extends HttpServlet {
+public class ControllerURL_OBSOLETO extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControllerURL() {
+    public ControllerURL_OBSOLETO() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -57,7 +57,7 @@ public class ControllerURL extends HttpServlet {
 			dispatcher.forward(request, response);
 		}*/
 		if(splitURL[1].compareTo("main.jsp")==0){
-		ControllerMain ob = new ControllerMain();
+		ControllerMain_OBSOLETO ob = new ControllerMain_OBSOLETO();
         ob.doPost(request, response);
 		}
 	}

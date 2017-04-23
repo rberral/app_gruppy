@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.ParseConversionEvent;
 
+import bean.Asociacion;
 import bean.Persona;
+import service.AsociacionService;
 import service.PersonaService;
 import util.Constantes;
 import util.Utilidades;
@@ -25,6 +27,8 @@ import util.Utilidades;
 public class ControllerProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PersonaService servicioP = new PersonaService();
+	private RequestDispatcher dispatcher = null;
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,6 +43,14 @@ public class ControllerProfile extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//response.sendRedirect(Constantes.URI_MI_PERFIL);
+		AsociacionService servicioA = new AsociacionService();
+		Asociacion a = servicioA.getAsociacion();
+		request.setAttribute("asociacion", a);
+		dispatcher = request.getRequestDispatcher(Constantes.URI_MI_PERFIL);
+		if (dispatcher != null) {
+			dispatcher.forward(request, response);
+		}		
 	}
 
 	/**
@@ -59,7 +71,8 @@ public class ControllerProfile extends HttpServlet {
 		//realizamos de nuevo validaciones
 		//recuperamos de la session el email anterior
 		Persona personaSession = (Persona) request.getSession().getAttribute(Constantes.sessionUsuario) ;
-		Persona p  = new Persona(email,pass,first_name,second_name,phone,f_nac, phone);
+		Persona p  = new Persona(email,pass,first_name,second_name,phone,f_nac, personaSession.getIdRol(), personaSession.isFundador(),personaSession.isActivo(), personaSession.getFechaAlta(), personaSession.getFechaBaja());
+
 		tx = servicioP.updatePersonaProfile(p, personaSession);
 		
 		if(tx){
@@ -72,7 +85,7 @@ public class ControllerProfile extends HttpServlet {
 
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/mi_perfil.jsp");  
+		RequestDispatcher dispatcher = request.getRequestDispatcher(Constantes.URI_MI_PERFIL);  
 		if (dispatcher != null){  
 		  dispatcher.forward(request, response); 
 		}	

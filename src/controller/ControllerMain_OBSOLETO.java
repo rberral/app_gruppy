@@ -24,7 +24,7 @@ import util.MaestroDatos;
 /**
  * Servlet implementation class ControllerMain
  */
-public class ControllerMain extends HttpServlet {
+public class ControllerMain_OBSOLETO extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	PersonaService servicioP = new PersonaService();
 
@@ -32,7 +32,7 @@ public class ControllerMain extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ControllerMain() {
+	public ControllerMain_OBSOLETO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -51,17 +51,14 @@ public class ControllerMain extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+/*
 		String oper = request.getParameter("oper");
 		String url = request.getParameter("url");
 		RequestDispatcher dispatcher = null;
 		boolean check = false;
 		switch (oper) {
 		case "logout": // elimnamos session y volvemos a index.
-			/*
-			HttpSession session = request.getSession(false);
-			request.removeAttribute("user");
-			session.invalidate();
-			*/
+
 			servicioP.deleteSessionUser(request);
 			check = false;
 			break;
@@ -82,7 +79,7 @@ public class ControllerMain extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}
-
+*/
 	}
 
 	/**
@@ -92,7 +89,8 @@ public class ControllerMain extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = null;
+/*		RequestDispatcher dispatcher = null;
+
 		// Recogemos variables form jsp
 		String email = request.getParameter("userName");
 		String pass = request.getParameter("userPassword");
@@ -106,11 +104,6 @@ public class ControllerMain extends HttpServlet {
 		// hacemos login sobre bbdd
 		if (!servicioP.loginUser(request, email, pass)) {
 			
-			// en caso erroneo, redireccionamos a index
-			/* dispatcher = request.getRequestDispatcher("/pages/index.jsp");
-			if (dispatcher != null) {
-				dispatcher.forward(request, response);
-			}*/
 		} else {
 			// login correcto
 			//inicializamos variables globales
@@ -120,7 +113,7 @@ public class ControllerMain extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}
-
+*/
 	}
 	
 	public void inicializaVariables(HttpServletRequest request){

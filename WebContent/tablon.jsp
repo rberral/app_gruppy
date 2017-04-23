@@ -1,3 +1,7 @@
+<%@page import="bean.TablonAnuncios"%>
+<%@page import="java.util.List"%>
+<%@page import="service.TablonService"%>
+<%@page import="util.Constantes"%>
 <%@page import="bean.Persona"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -11,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Tablón</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -49,6 +53,10 @@
 <body>
 <%
 	Persona p = (Persona)request.getSession().getAttribute("user");
+	TablonService tablonS = new TablonService();
+	List<TablonAnuncios> listaAnuncios = tablonS.listAnuncios();
+	List<TablonAnuncios> listaMisAnuncios = tablonS.listAnunciosPersona(p.getEmail());
+	
 	
 %>
     <div id="wrapper">
@@ -161,7 +169,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="ControllerMain?oper=logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="LogoutServlet"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -185,8 +193,11 @@
                             Dashboard <small>Statistics Overview</small>
                         </h1>
                         <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="main.jsp">Principal</a>
+                            </li>
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
+                                <i class="fa fa-bar-chart-o"></i> Tablón
                             </li>
                         </ol>
                     </div>
@@ -199,49 +210,92 @@
     <p class="lead">Esto es un tablón de publicación de noticias relevantes para la asociación.</p>
   </div>
 </div>
-<div class="form-group">
+<div class="form-group col-sm-4 col-md-4">
+<form method="post" action="ControllerTablon" id="publishCommentForm">
 <!-- Title -->
 <div class="form-group row">
   <label class="col-md-4 control-label">Asunto</label>  
-  <div class="col-md-4 inputGroupContainer">
+  <div class="col-md-8 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-text-color"></i></span>
-  <input  name="first_name" placeholder="First Name" class="form-control"  type="text">
+  <input  name="asunto" placeholder="Asunto" class="form-control"  type="text">
     </div>
   </div>
 </div>
 <!-- Text area -->
-<div class="form-group">
+<div class="form-group row">
   <label class="col-md-4 control-label">Descripción</label>
-    <div class="col-md-4 inputGroupContainer">
+    <div class="col-md-8 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-            <textarea class="form-control" name="comment" placeholder="Project Description"></textarea>
+            <textarea class="form-control" name="descripcion" placeholder="Descripción"></textarea>
   </div>
   </div>
 </div>
-<div class="form-group">
-  <label class="col-md-4 control-label"></label>
-  <div class="col-md-4">
-    <button type="submit" class="btn btn-warning" >Publicar <span class="glyphicon glyphicon-send"></span></button>
-  </div>
+<div class="form-group row">
+    <button type="button" class="btn btn-warning" onclick="checkFrmPublish();">Publicar <span class="glyphicon glyphicon-send"></span></button>
 </div>
+</form>
+    <div id="results" class="row">
+    <%
+    String respuesta = (String)request.getAttribute(Constantes.RESPUESTA_ACCION);
+    if(respuesta != null){
+    	if(respuesta.equals(Constantes.RESPUESTA_OK_VALUE)){
+    		%><label><%=Constantes.MSG_OK_UPDATE%></label><%
+    	}
+    	else{
+    		%><label><%=Constantes.MSG_ERROR_UPDATE%></label><%
+    	}
+    }
+    %>
+    </div>
 </div>
-<div class="row page-header">
-  <h1>Example page header</h1>
+<div class="row col-sm-4 col-md-4">
+  <h1>Tablón</h1>
   <div class="row">
-  <div class="col-sm-6 col-md-4">
+  <div class="col-sm-12 col-md-12">
     <div class="thumbnail">
-      <div class="caption">
-        <h3>Anuncio 1</h3>
-        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-      </div>
+    <%
+	if(listaAnuncios.isEmpty()){
+		%><div class="caption"><h3>Publica tu primer anuncio! :)</h3></div><%
+	}
+    	for(int i=0;i<listaAnuncios.size();i++){
+    		%>
+    		 <div class="caption">
+    		 <h3><%= listaAnuncios.get(i).getAsunto() %></h3>
+    		 <h4><b><i>Publicado por: <%= listaAnuncios.get(i).getEmailPersona() %></i></b></h4>
+    		<p><%= listaAnuncios.get(i).getDescripcion() %>
+      		</div>
+    		<%   	
+    	}
+    		%>
     </div>
   </div>
 </div>
 </div>
 
-
+<div class="row col-sm-4 col-md-4">
+  <h1>Mis Anuncios</h1>
+  <div class="row">
+  <div class="col-sm-12 col-md-12">
+    <div class="thumbnail">
+    <%
+    	if(listaMisAnuncios.isEmpty()){
+    		%><div class="caption"><h3>¡Publica tu primer anuncio! :)</h3></div><%
+    	}
+    	for(int i=0;i<listaMisAnuncios.size();i++){
+    		%>
+    		 <div class="caption">
+    		 <h3><%= listaMisAnuncios.get(i).getAsunto() %></h3>
+    		<p><%= listaMisAnuncios.get(i).getDescripcion() %>
+      		</div>
+    		<%    		
+    	}
+    		%>
+    </div>
+  </div>
+</div>
+</div>
 		
             </div>
             <!-- /.container-fluid -->
@@ -253,6 +307,8 @@
     <!-- /#wrapper -->
     <!-- Navbar Left -->
  <script src="lib/navbar_left.js"></script>
+ 	<!-- main.js -->
+ <script src="js/main.js"></script> 
 </body>
 
 </html>

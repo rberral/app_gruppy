@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 23-mar-2017 23:45:22 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 22-abr-2017 18:44:51 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="bean.Persona" table="persona" catalog="proyecto_asociacion">
-        <id name="email" type="string">
-            <column name="email" length="65535" />
-            <generator class="assigned" />
+        <id name="idPersona" type="java.lang.Integer">
+            <column name="id_persona" />
+            <generator class="identity" />
         </id>
+        <property name="email" type="string">
+            <column name="email" length="65535" not-null="true" />
+        </property>
         <property name="pass" type="string">
             <column name="pass" length="50" not-null="true" />
         </property>
@@ -31,6 +34,12 @@
         </property>
         <property name="activo" type="boolean">
             <column name="activo" not-null="true" />
+        </property>
+        <property name="fechaAlta" type="date">
+            <column name="fecha_alta" length="10" not-null="true" />
+        </property>
+        <property name="fechaBaja" type="date">
+            <column name="fecha_baja" length="10" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

@@ -1,3 +1,6 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="util.MaestroDatos"%>
+<%@page import="java.util.Map"%>
 <%@page import="util.Utilidades"%>
 <%@page import="util.Constantes"%>
 <%@page import="java.util.List"%>
@@ -17,7 +20,7 @@
     <meta name="author" content="">
 
 
-<title>SB Admin - Bootstrap Admin Template</title>
+<title>Socios</title>
     <!-- Bootstrap Core CSS -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -52,6 +55,8 @@
 	Persona p = (Persona)request.getSession().getAttribute(Constantes.sessionUsuario);
 	PersonaService personaS = new PersonaService();
 	List<Persona> listado_socios = personaS.listPersonas();
+	Map<Boolean, String> listadoBooleanos = (Map<Boolean,String>)MaestroDatos.getBooleanValuesSelect();
+ 	Iterator iterator = listadoBooleanos.entrySet().iterator();
 	
 %>
 
@@ -164,7 +169,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="ControllerMain?oper=logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="LogoutServlet"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -187,8 +192,11 @@
                             Dashboard <small>Statistics Overview</small>
                         </h1>
                         <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="main.jsp"> Principal</a>
+                            </li>
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
+                                <i class="fa fa-bar-chart-o"></i> Socios
                             </li>
                         </ol>
                     </div>
@@ -208,9 +216,12 @@
     <button type="button" class="btn btn-default" id="btnEdit">
         <i class="glyphicon glyphicon-pencil"></i>
     </button>
+    <!-- 
     <button type="button" class="btn btn-default" id="btnRemove">
         <i class="glyphicon glyphicon-trash"></i>
     </button>
+    
+    -->
 </div>
 	<%
   }
@@ -223,12 +234,14 @@
 <th data-field="ColumnEmail" data-sortable="true">Email</th>
 <th data-field="ColumnNombre" data-sortable="true">Nombre</th>
 <th data-field="ColumnApellidos" data-sortable="true">Apellidos</th> 
-<th data-field="ColumnContrasenna" data-sortable="true">Contraseña</th>
+<!-- <th data-field="ColumnContrasenna" data-sortable="true">Contraseña</th>-->
 <th data-field="ColumnMovil" data-sortable="true">Teléfono</th>
 <th data-field="ColumnFecha" data-sortable="true">Fecha Nacimiento</th>
 <th data-field="ColumnRol" data-sortable="true">Rol</th>
 <th data-field="ColumnFundador" data-sortable="true">Fundador</th>
 <th data-field="ColumnActivo" data-sortable="true">Activo</th>
+<th data-field="ColumnFechaAlta" data-sortable="true">Fecha Alta</th>
+<th data-field="ColumnFechaBaja" data-sortable="true">Fecha Baja</th>
 </tr>
 </thead><tbody>
 	<%
@@ -239,12 +252,14 @@
 				<td class="columnEmail"><%= aux.getEmail() %></td> 
 				<td class="columnNombre"><%= aux.getNombre() %></td>
         		<td class="columnApellidos"><%= aux.getApellidos() %></td>
-        		<td class="columnContrasenna"><%= aux.getPass() %></td>
+        	<!-- 	<td class="columnContrasenna"><%= aux.getPass() %></td>-->
         		<td class="columnMovil"><%= aux.getTelefono() %></td>
-        		<td class="columnFecha"><%= aux.getFechaNacimiento() %></td>
-        		<td class="columnRol"><%= aux.getIdRol() %></td>
-        		<td class="columnFundador"><%= aux.isFundador() %></td>
-        		<td class="columnActivo"><%= aux.isActivo() %></td>
+        		<td class="columnFecha"><%= Utilidades.getFechaToJSP(aux.getFechaNacimiento()) %></td>
+        		<td class="columnRol"><%= Utilidades.getValueRol(aux.getIdRol()) %></td>
+        		<td class="columnFundador"><%= Utilidades.getValueBooleanSelectToJSP(aux.isFundador()) %></td>
+        		<td class="columnActivo"><%= Utilidades.getValueBooleanSelectToJSP(aux.isActivo()) %></td>
+        		<td class="columnFechaAlta"><%= Utilidades.getFechaToJSP(aux.getFechaAlta()) %></td>
+        		<td class="columnFechaBaja"><%= Utilidades.getFechaToJSP(aux.getFechaBaja()) %></td>
         		</tr>
         <%
 		}
@@ -258,26 +273,57 @@
         <table id="tableEdit" class="table table-bordered" >
             <thead>
               <tr> 
-              <th data-field="Email">Email</th>
-              <th data-field="Nombre">Nombre</th> 
+             <th data-field="Email">Email</th>
+             <!--  <th data-field="Nombre">Nombre</th> 
               <th data-field="Apellidos">Apellidos</th>
               <th data-field="Contrasenna">Contraseña</th>
               <th data-field="Movil">Movil</th>
               <th data-field="Fecha">Fecha Nacimiento</th>
-              <th data-field="Rol">Rol</th>
+              <th data-field="Rol">Rol</th>-->
               <th data-field="Fundador">Fundador</th>
               <th data-field="Activo">Activo</th>
+              <th data-field="FechaAlta">Fecha Alta</th>
               </tr>
               <tr>
                 <td><input type="text" class="form-control" id="editEmail" disabled/></td>
-                <td><input type="text" class="form-control" id="editNombre" disabled/></td>
+            <!--    <td><input type="text" class="form-control" id="editNombre" disabled/></td>
                 <td><input type="text" class="form-control" id="editApellidos" disabled/></td>
-                <td><input type="text" class="form-control" id="editContrasenna" disabled/></td>
+               <td><input type="text" class="form-control" id="editContrasenna" disabled/></td>
                 <td><input type="text" class="form-control" id="editMovil" disabled/></td>
-                <td><input type="text" class="form-control" id="editFecha" disabled/></td>
-                <td><input type="text" class="form-control" id="editRol" disabled/></td>
-                <td><input type="text" class="form-control" id="editFundador"/></td>
-                <td><input type="text" class="form-control" id="editActivo" disabled/></td>
+                <td><input type="date" class="form-control" id="editFecha" disabled/></td>
+                <td><input type="text" class="form-control" id="editRol" disabled/></td>-->
+             <!--    <td><input type="text" class="form-control" id="editFundador"/></td>-->
+                   <td><select class="form-control" id="editFundador">
+     <% while (iterator.hasNext()){	
+     	 Map.Entry<Boolean,String> entry = (Map.Entry<Boolean,String>) iterator.next();
+     	 	if(p.isFundador() == entry.getKey()){
+     	 		 %><option id="<%=entry.getKey() %>" selected><%=entry.getValue() %></option><%
+     	 	}
+     	 	else{
+     	 		%><option id="<%=entry.getKey() %>"><%=entry.getValue() %></option><% 
+     	 	}
+     		
+      }%>
+     </select></td>
+                <!-- <td><input type="text" class="form-control" id="editActivo" disabled/></td>-->
+                 <td><select class="form-control" id="editActivo">
+     <% 
+     
+     iterator = listadoBooleanos.entrySet().iterator();
+     while (iterator.hasNext()){	
+     	 Map.Entry<Boolean,String> entry = (Map.Entry<Boolean,String>) iterator.next();
+     	 	if(p.isActivo() == entry.getKey()){
+     	 		 %><option id="<%=entry.getKey() %>" selected><%=entry.getValue() %></option><%
+     	 	}
+     	 	else{
+     	 		%><option id="<%=entry.getKey() %>"><%=entry.getValue() %></option><% 
+     	 	}
+     		
+      }%>
+     </select></td>
+ <td><input  id="editFechaAlta" placeholder="AAAA/MM/DD" class="form-control"  type="date" value="<%= Utilidades.getFechaToJSP(p.getFechaAlta()) %>"></td>
+     
+ 
               </tr>
             </thead>
         </table>
@@ -297,10 +343,10 @@
     String respuesta = (String)request.getAttribute(Constantes.RESPUESTA_ACCION);
     if(respuesta != null){
     	if(respuesta.equals(Constantes.RESPUESTA_OK_VALUE)){
-    		%><label><%=Constantes.MSG_OK_UPDATE_USER%></label><%
+    		%><label><%=Constantes.MSG_OK_UPDATE%></label><%
     	}
     	else{
-    		%><label><%=Constantes.MSG_ERROR_UPDATE_USER%></label><%
+    		%><label><%=Constantes.MSG_ERROR_UPDATE%></label><%
     	}
     }
     %>

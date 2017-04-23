@@ -1,7 +1,15 @@
 package dao;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.logging.Logger;
+
+
+
+
 
 
 
@@ -112,16 +120,19 @@ public class PersonaDAO {
 		session.close();
 		return dev;*/
 		
-		Persona aux = (Persona)session.get(Persona.class,pOld.getEmail());
-		if(!(aux==null)){
-		 aux.setNombre(p.getNombre());
-		 aux.setApellidos(p.getApellidos());
-		 aux.setEmail(p.getEmail());
-		 aux.setFechaNacimiento(p.getFechaNacimiento());
-		 aux.setTelefono(p.getTelefono());
-		 aux.setPass(p.getPass());
+		//Persona aux = (Persona)session.get(Persona.class,pOld.getEmail());
+		if(!(pOld==null)){
+		 //aux.setIdPersona(p.getIdPersona());
+			pOld.setNombre(p.getNombre());
+			pOld.setApellidos(p.getApellidos());
+			pOld.setEmail(p.getEmail());
+			pOld.setFechaNacimiento(p.getFechaNacimiento());
+		 pOld.setTelefono(p.getTelefono());
+		 pOld.setPass(p.getPass());
+		 pOld.setFechaAlta(p.getFechaAlta());
+		 //aux.setFechaBaja(p.getFechaBaja());
 		// Above line is just an example, set whatever you want to, ideally this should be done in Service layer, but okay for now
-		    session.merge(aux);
+		    session.merge(pOld);
 		    session.flush();
 		    session.close();
 		    dev = true;
@@ -129,78 +140,81 @@ public class PersonaDAO {
 		return dev;
 	}
 	
-	//Actualiza datos Persona (fundador) -> Pestaña Socios
-	public boolean updatePersonaFundador(String email, Boolean fundador){
+	//Actualiza datos Persona -> Pestaña Socios
+	public boolean updatePersonaSocio(String email, Boolean fundador, Date f_alta, boolean activo){
 		boolean dev = false;
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		/*String hqlUpdate = "UPDATE persona as p set " +
-				"p.fundador = :newFundador " +
-				"where p.email = :oldEmail";
-		try {
-			// or String hqlUpdate = "update Customer set name = :newName where name = :oldName";
-			int updatedEntities = session.createQuery( hqlUpdate )
-			        .setBoolean( "newFundador", fundador)
-			        .setString( "oldEmail", email )
-			        .executeUpdate();
-			session.getTransaction().commit();	
-		}catch (HibernateException e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}
-		session.close();*/
-		Persona p = (Persona)session.get(Persona.class,email);
+		
+		Persona p = this.getPersona(email);
+		//Persona p = (Persona)session.get(Persona.class,email);
 		if(!(p==null)){
 		 p.setFundador(fundador);
-		// Above line is just an example, set whatever you want to, ideally this should be done in Service layer, but okay for now
-		    session.merge(p);
-		    session.flush();
-		    session.close();
-		    dev = true;
-		}
-		return dev;
-	}
-	
-	//Actualiza datos Persona (activo) -> Pestaña Socios
-	public boolean updatePersonaActivo(String email, boolean activo){
-		boolean dev = false;
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		/*String hqlUpdate = "UPDATE persona as p set " +
-				"p.activo = :newActivo " +
-				"where p.email = :oldEmail";
-		try {
-			// or String hqlUpdate = "update Customer set name = :newName where name = :oldName";
-			int updatedEntities = session.createQuery( hqlUpdate )
-			        .setBoolean( "newActivo", activo)
-			        .setString( "oldEMail", email )
-			        .executeUpdate();
-			session.getTransaction().commit();	
-		}catch (HibernateException e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}
-		session.close();
-		return dev;*/
-		
-		Persona p = (Persona)session.get(Persona.class,email);
-		if(!(p==null)){
+		 p.setFechaAlta(f_alta);
 		 p.setActivo(activo);
+		 // Si se marca como baja, actualizamos fecha de baja
+		 if(!activo){
+			 p.setFechaBaja(new Date());
+		 }
+		 else{
+			 Calendar calendar = Calendar.getInstance();
+			 calendar.set(9999, 11, 31); //11 = Diciembre
+			 p.setFechaBaja(calendar.getTime());
+		 }
+		 dev = this.updatePersona(p);
+		}
+		return dev;
+		/*
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Persona p = this.getPersona(email);
+		//Persona p = (Persona)session.get(Persona.class,email);
+		if(!(p==null)){
+		 p.setFundador(fundador);
+		 p.setFechaAlta(f_alta);
+		 p.setActivo(activo);
+		 // Si se marca como baja, actualizamos fecha de baja
+		 if(!activo){
+			 p.setFechaBaja(new Date());
+		 }
+		 else{
+			 p.setFechaBaja(new Date(9999,12,31));
+		 }
 		// Above line is just an example, set whatever you want to, ideally this should be done in Service layer, but okay for now
 		    session.merge(p);
 		    session.flush();
 		    session.close();
 		    dev = true;
 		}
-		return dev;
+		return dev;*/
 	}
 	
+//	//Actualiza datos Persona (activo) -> Pestaña Socios
+//	public boolean updatePersonaActivo(String email, boolean activo){
+//		boolean dev = false;
+//		Session session = HibernateUtil.getSessionFactory().openSession();
+//		Persona p = (Persona)session.get(Persona.class,email);
+//		if(!(p==null)){
+//		 p.setActivo(activo);
+//		 // Si se marca como baja, actualizamos fecha de baja
+//		 if(!activo){
+//			 p.setFechaBaja(new Date());
+//		 }
+//		// Above line is just an example, set whatever you want to, ideally this should be done in Service layer, but okay for now
+//		    session.merge(p);
+//		    session.flush();
+//		    session.close();
+//		    dev = true;
+//		}
+//		return dev;
+//	}
+//	
 	
 	public List<Persona> listPersonas() {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		//List<Persona> list = session.createCriteria(Persona.class).list();
 		//List<Persona> personaList = session.createQuery("from Persona").list();
-		Criteria criteria =  session.createCriteria(Persona.class)
-				.add(Restrictions.eq("activo", true));
+		Criteria criteria =  session.createCriteria(Persona.class);
+				//.add(Restrictions.eq("activo", true));
 		List<Persona> personaList = criteria.list();
 		session.close();
 		return personaList;
@@ -214,6 +228,32 @@ public class PersonaDAO {
 		Criteria criteria = session.createCriteria(Persona.class)
 				.add(Restrictions.eq("email", email))
 				.add(Restrictions.eq("pass", pass));
+		p = (Persona)criteria.uniqueResult();
+		session.close();
+		//return (Persona)criteria.list().get(0);
+		return p;
+	}
+	
+	public Persona getPersona(String email){
+		Persona p = new Persona();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		//List<Persona> list = session.createCriteria(Persona.class).list();
+		//List<Persona> personaList = session.createQuery("from Persona where email="+p.getEmail() " and").list();
+		Criteria criteria = session.createCriteria(Persona.class)
+				.add(Restrictions.eq("email", email));
+		p = (Persona)criteria.uniqueResult();
+		session.close();
+		//return (Persona)criteria.list().get(0);
+		return p;
+	}
+	
+	public Persona getPersona(int id_persona){
+		Persona p = new Persona();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		//List<Persona> list = session.createCriteria(Persona.class).list();
+		//List<Persona> personaList = session.createQuery("from Persona where email="+p.getEmail() " and").list();
+		Criteria criteria = session.createCriteria(Persona.class)
+				.add(Restrictions.eq("idPersona", id_persona));
 		p = (Persona)criteria.uniqueResult();
 		session.close();
 		//return (Persona)criteria.list().get(0);

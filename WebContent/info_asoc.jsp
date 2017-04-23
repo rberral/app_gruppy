@@ -1,3 +1,6 @@
+<%@page import="util.Utilidades"%>
+<%@page import="util.Constantes"%>
+<%@page import="bean.Asociacion"%>
 <%@page import="bean.Persona"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -11,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Asociación</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -51,8 +54,8 @@
 
 <body>
 <%
-	Persona p = (Persona)request.getSession().getAttribute("user");
-	
+	Persona p = (Persona)request.getSession().getAttribute(Constantes.sessionUsuario);
+	Asociacion a = (Asociacion) request.getAttribute("asociacion");
 %>
     <div id="wrapper">
 
@@ -164,7 +167,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="ControllerMain?oper=logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="LogoutServlet"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -187,63 +190,122 @@
                             Dashboard <small>Statistics Overview</small>
                         </h1>
                         <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="main.jsp">Principal</a>
+                            </li>
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
+                                <i class="fa fa-bar-chart-o"></i> Asociación
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
 
-<form class="col-md-8 col-md-offset-2">
+<form class="col-md-8 col-md-offset-2" method="post" action="ControllerAsociacion" id="updateAsociacionForm">
 <div class="form-group row">
-  <label for="example-text-input" class="col-2 col-form-label">Asociación</label>
+  <!-- <label for="example-text-input" class="col-2 col-form-label">Asociación</label>
   <div class="col-10">
     <input class="form-control" type="text" value="EL Beso de Judas" id="example-text-input">
   </div>
+  -->
+  <label class="col-md-4 control-label">Asociación (*)</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+  <input  name="name_asoc" placeholder="Nombre Asociación" class="form-control"  type="text" value="<%= a.getNombre() %>">
+     </div>
+  </div>  
 </div>
 
 <div class="form-group row">
-  <label for="example-text-input" class="col-2 col-form-label">Descripción</label>
+ <!--  <label for="example-text-input" class="col-2 col-form-label">Descripción</label>
   <div class="col-10">
     <input class="form-control" type="text" value="Asociación cultural" id="example-text-input">
+  </div>-->
+    <label class="col-md-4 control-label">Descripción (*)</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+  <input  name="descripcion_asoc" placeholder="Descripción" class="form-control"  type="text" value="<%= a.getDescripcion() %>">
+     </div>
   </div>
 </div>
 
 
 <div class="form-group row">
-  <label for="example-text-input" class="col-2 col-form-label glyphicon glyphicon-home">Dirección</label>
+<!--   <label for="example-text-input" class="col-2 col-form-label glyphicon glyphicon-home">Dirección</label>
   <div class="col-10">
     <input class="form-control" type="text" value="Calle Aguilar, s/n" id="example-text-input">
-  </div>
+  </div>-->
+  <label class="col-md-4 control-label">Dirección (*)</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-tags"></i></span>
+  <input  name="direccion_asoc" placeholder="Dirección" class="form-control"  type="text" value="<%= a.getDireccion() %>">
+     </div>
+  </div>  
 </div>
 
 
 <div class="form-group row">
-  <label for="example-email-input" class="col-2 col-form-label glyphicon glyphicon-envelope">Email</label>
+ <!--  <label for="example-email-input" class="col-2 col-form-label glyphicon glyphicon-envelope">Email</label>
   <div class="col-10">
     <input class="form-control" type="email" value="elbeso@example.com" id="example-email-input">
-  </div>
+  </div>-->
+  <label class="col-md-4 control-label">Email</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+<!--  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>-->
+	<span class="input-group-addon">@</span>
+  <input  name="email_asoc" placeholder="Email" class="form-control"  type="text" value="<%= a.getEmail() %>">
+     </div>
+  </div>  
 </div>
 
 <div class="form-group row">
-  <label for="example-tel-input" class="col-2 col-form-label glyphicon glyphicon-earphone">Teléfono</label>
+<!--   <label for="example-tel-input" class="col-2 col-form-label glyphicon glyphicon-earphone">Teléfono</label>
   <div class="col-10">
     <input class="form-control" type="tel" value="1-(555)-555-5555" id="example-tel-input">
-  </div>
+  </div>-->
+  <label class="col-md-4 control-label">Teléfono</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+  <input  name="telefono_asoc" placeholder="Teléfono" class="form-control"  type="text" value="<%= a.getTelefono() %>">
+     </div>
+  </div>  
 </div>
 
 <div class="form-group row">
-  <label for="example-date-input" class="col-2 col-form-label">Fecha Fundación</label>
+  <!-- <label for="example-date-input" class="col-2 col-form-label">Fecha Fundación</label>
   <div class="col-10">
     <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
-  </div>
+  </div>-->
+  <label class="col-md-4 control-label">Fecha Fundación (*)</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+  <input  name="fecha_fundacion_asoc" placeholder="AAAA/MM/DD" class="form-control"  type="date" value="<%= Utilidades.getFechaToJSP(a.getFechaFundacion()) %>">
+     </div>
+  </div>  
 </div>
 
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="button" class="btn btn-primary" onclick="checkFrmAsociacion();">Submit</button>
 </form>
-
+    <div id="results" class="row">
+    <%
+    String respuesta = (String)request.getAttribute(Constantes.RESPUESTA_ACCION);
+    if(respuesta != null){
+    	if(respuesta.equals(Constantes.RESPUESTA_OK_VALUE)){
+    		%><label><%=Constantes.MSG_OK_UPDATE%></label><%
+    	}
+    	else{
+    		%><label><%=Constantes.MSG_ERROR_UPDATE%></label><%
+    	}
+    }
+    %>
+    </div>
             </div>
             <!-- /.container-fluid -->
 
@@ -254,6 +316,8 @@
     <!-- /#wrapper -->
     <!-- NavBar Left -->
  <script src="lib/navbar_left.js"></script>
+  	<!-- main.js -->
+ <script src="js/main.js"></script>
 </body>
 
 </html>

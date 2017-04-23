@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Perfil</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -173,7 +173,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="ControllerMain?oper=logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="LogoutServlet"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -197,8 +197,11 @@
                             Dashboard <small>Statistics Overview</small>
                         </h1>
                         <ol class="breadcrumb">
+						<li>
+                                <i class="fa fa-dashboard"></i>  <a href="main.jsp">Principal</a>
+                            </li>
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
+                                <i class="fa fa-bar-chart-o"></i>Perfil
                             </li>
                         </ol>
                     </div>
@@ -231,7 +234,7 @@
   <label class="col-md-4 control-label">Contrasñea</label>  
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
-  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
   <input  name="password" placeholder="Contraseña" class="form-control"  type="pass" value="<%= p.getPass() %>">
     </div>
   </div>
@@ -287,6 +290,16 @@
   </div>
 </div>
 
+<div class="form-group row">
+  <label class="col-md-4 control-label">Fecha Alta</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+    <input  name="fecha_nac" placeholder="AAAA/MM/DD" class="form-control"  type="date" value="<%= Utilidades.getFechaToJSP(p.getFechaAlta()) %>" disabled>
+    </div>
+  </div>
+</div>
+
   <div class="checkbox">
     <label>
     <% if(p.isFundador()){	%>   
@@ -303,10 +316,10 @@
     String respuesta = (String)request.getAttribute(Constantes.RESPUESTA_ACCION);
     if(respuesta != null){
     	if(respuesta.equals(Constantes.RESPUESTA_OK_VALUE)){
-    		%><label><%=Constantes.MSG_OK_UPDATE_USER%></label><%
+    		%><label><%=Constantes.MSG_OK_UPDATE%></label><%
     	}
     	else{
-    		%><label><%=Constantes.MSG_ERROR_UPDATE_USER%></label><%
+    		%><label><%=Constantes.MSG_ERROR_UPDATE%></label><%
     	}
     }
     %>

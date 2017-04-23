@@ -86,7 +86,9 @@
     <div class="row">
         <div class="col-md-offset-1 col-md-6">
             <div class="form-login">
-          <form method="post" action="ControllerMain?oper=login">
+        <!-- <form method="post" action="ControllerMain?oper=login">-->
+         <form method="post" action="LoginServlet">
+          <input type="hidden" name="oper" id="oper" value="login" >
             <h4>Login</h4>
             <hr>
             <input type="text" id="userName" name="userName" class="form-control input-sm chat-input" placeholder="username" value="email@hotmail.com" />
@@ -96,7 +98,8 @@
             <div class="wrapper">
             <span class="group-btn">    
 			<input class="btn btn-primary btn-md" type="submit" value="Login_OK">
-			<a href="main.html" type="submit" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>
+			<!-- <a href="main.html" type="submit" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>-->
+			<a type="submit" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>			
             </span>
             </form>  
             </div>

@@ -13,7 +13,7 @@
     <meta name="author" content="">
 
 
-<title>SB Admin - Bootstrap Admin Template</title>
+<title>Principal</title>
     <!-- Bootstrap Core CSS -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -149,7 +149,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="ControllerMain?oper=logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="LogoutServlet"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -172,7 +172,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
+                                <i class="fa fa-dashboard"></i> Principal
                             </li>
                         </ol>
                     </div>

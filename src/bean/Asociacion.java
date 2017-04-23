@@ -1,6 +1,6 @@
 package bean;
 
-// Generated 23-mar-2017 23:45:21 by Hibernate Tools 3.4.0.CR1
+// Generated 22-abr-2017 18:44:50 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -12,14 +12,21 @@ public class Asociacion implements java.io.Serializable {
 	private Integer idAsociacion;
 	private String nombre;
 	private String descripcion;
+	private String direccion;
+	private String email;
+	private int telefono;
 	private Date fechaFundacion;
 
 	public Asociacion() {
 	}
 
-	public Asociacion(String nombre, String descripcion, Date fechaFundacion) {
+	public Asociacion(String nombre, String descripcion, String direccion,
+			String email, int telefono, Date fechaFundacion) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.direccion = direccion;
+		this.email = email;
+		this.telefono = telefono;
 		this.fechaFundacion = fechaFundacion;
 	}
 
@@ -45,6 +52,30 @@ public class Asociacion implements java.io.Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
 	}
 
 	public Date getFechaFundacion() {
