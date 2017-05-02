@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-abr-2017 21:27:08 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="bean.Invitado" table="invitado" catalog="proyecto_asociacion">
+        <id name="idInvitado" type="java.lang.Integer">
+            <column name="id_invitado" />
+            <generator class="identity" />
+        </id>
+        <property name="emailPersona" type="string">
+            <column name="email_persona" length="65535" not-null="true" />
+        </property>
+        <property name="fechaInvitacion" type="date">
+            <column name="fecha_invitacion" length="10" not-null="true" />
+        </property>
+        <property name="nombreInvitado" type="string">
+            <column name="nombre_invitado" length="65535" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="65535" />
+        </property>
+    </class> 
+</hibernate-mapping>

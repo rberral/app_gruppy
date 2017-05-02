@@ -24,6 +24,8 @@ public final class Constantes {
 	public static final String URI_MI_PERFIL = "/mi_perfil.jsp";
 	public static final String URI_SOCIOS = "/socios.jsp";
 	public static final String URI_TABLON = "/tablon.jsp";
+	public static final String URI_INVITADOS = "/invitados.jsp";
+	
 
 	public static final String URI_OPER_LOGOUT = "logout";
 	public static final String URI_OPER_LOGIN = "login";

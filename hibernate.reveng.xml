@@ -2,12 +2,12 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-<type-mapping>
-	<sql-type jdbc-type="VARCHAR" hibernate-type="string" length="50"
-		not-null="true">
-	</sql-type>
-</type-mapping>
-<table-filter match-catalog="proyecto_asociacion"
+	<type-mapping>
+		<sql-type jdbc-type="VARCHAR" hibernate-type="string"
+			length="50" not-null="true">
+		</sql-type>
+	</type-mapping>
+	<table-filter match-catalog="proyecto_asociacion"
 		match-name="asociacion" />
 	<table-filter match-catalog="proyecto_asociacion"
 		match-name="desglose_cuentas" />
@@ -19,6 +19,9 @@
 	<table-filter match-catalog="proyecto_asociacion"
 		match-name="tablon_anuncios" />
 	<table-filter match-name="persona"
+		match-catalog="proyecto_asociacion">
+	</table-filter>
+	<table-filter match-name="invitado"
 		match-catalog="proyecto_asociacion">
 	</table-filter>
 	<table catalog="proyecto_asociacion" name="persona"></table>

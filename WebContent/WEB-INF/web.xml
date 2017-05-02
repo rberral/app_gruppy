@@ -93,4 +93,14 @@
     <servlet-name>ControllerTablon</servlet-name>
     <url-pattern>/ControllerTablon</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ControllerInvitados</display-name>
+    <servlet-name>ControllerInvitados</servlet-name>
+    <servlet-class>controller.ControllerInvitados</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControllerInvitados</servlet-name>
+    <url-pattern>/ControllerInvitados</url-pattern>
+  </servlet-mapping>
 </web-app>

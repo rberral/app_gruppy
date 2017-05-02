@@ -13,6 +13,7 @@
         <property name="hibernate.validator.apply_to_ddl">false</property>
         <mapping resource="bean/TablonAnuncios.hbm.xml" />
         <mapping resource="bean/Asociacion.hbm.xml" />
+        <mapping resource="bean/Invitado.hbm.xml" />
         <mapping resource="bean/Rol.hbm.xml" />
         <mapping resource="bean/DesgloseCuentasAdicional.hbm.xml" />
         <mapping resource="bean/LibroCuentas.hbm.xml" />
@@ -20,3 +21,4 @@
         <mapping resource="bean/Persona.hbm.xml" />
     </session-factory>
 </hibernate-configuration>
+  
