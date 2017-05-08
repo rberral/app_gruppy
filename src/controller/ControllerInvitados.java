@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.Invitado;
+import bean.Persona;
+import service.InvitadoService;
 import service.PersonaService;
 import util.Constantes;
 import util.Utilidades;
@@ -21,6 +24,7 @@ import util.Utilidades;
 public class ControllerInvitados extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public RequestDispatcher dispatcher = null;
+	PersonaService servicioP = new PersonaService();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -52,26 +56,44 @@ public class ControllerInvitados extends HttpServlet {
 		//Ejecucion de servlet desde formularios
 		//sentencia para forzar ejecución de metodo get
 		//doGet(request, response);
-		PersonaService servicioP = new PersonaService();
+		InvitadoService servicioI = new InvitadoService();
 		boolean tx = false;
 		// vamos a extraer la operacion
 		String oper = null;
 		String email = null;
-		boolean fundador = false;
 		Date f_alta = null;
-		boolean activo = false;
+		String nombre = null;
+		String observaciones = null;
 		String params = request.getParameter("params");
 
 		
 		Map<String, String> mapa = new HashMap<String, String>();
 		mapa = Utilidades.getMapa(params);
-		email = mapa.get(Constantes.FORM_JS_EMAIL);
-		f_alta = Utilidades.getFechaToBBDD(mapa.get(Constantes.FORM_JS_FECHA_ALTA));
+		Persona p = (Persona)request.getSession().getAttribute(Constantes.sessionUsuario);
+		email = p.getEmail();
+		f_alta = Utilidades.getFechaToBBDD(mapa.get(Constantes.FORM_JS_FECHA));
+		nombre = mapa.get(Constantes.FORM_JS_NOMBRE);
+		observaciones = mapa.get(Constantes.FORM_JS_OBSERVACIONES);
 		oper = mapa.get(Constantes.FORM_JS_OPER);
-		if(oper.compareTo(Constantes.FORM_JS_OPER_UPDATE)==0){
-			fundador = Utilidades.getValueBooleanSelectToBBDD(mapa.get(Constantes.FORM_JS_FUNDADOR));			
-			tx=servicioP.updatePersonaSocio(email,fundador,f_alta, activo);
+		Invitado i = new Invitado(email, f_alta, nombre, observaciones);
+		//Realizamos validacion de fecha de invitado antes de seguir
+		if(Utilidades.checkDateInvitado(f_alta)){
+			if(oper.compareTo(Constantes.FORM_JS_OPER_UPDATE)==0){
+				i.setIdInvitado(Integer.parseInt(mapa.get(Constantes.FORM_JS_IDENTIFICADOR)));
+				tx=servicioI.updateInvitado(i);
+			}
+			if(oper.compareTo(Constantes.FORM_JS_OPER_DELETE)==0){
+				i.setIdInvitado(Integer.parseInt(mapa.get(Constantes.FORM_JS_IDENTIFICADOR)));
+				tx=servicioI.removeInvitado(i);
+			}
+			if(oper.compareTo(Constantes.FORM_JS_OPER_INSERT)==0){
+				tx=servicioI.addInvitado(i);
+			}
 		}
+		else{
+			tx = false;
+		}
+
 //		else if(oper.compareTo(Constantes.FORM_JS_OPER_DELETE)==0){
 //			//No es necesario recoger valor de activo, ya que sabemos el tipo de operacion -> Delete
 //			tx=servicioP.updatePersonaActivo(email, false);
@@ -84,7 +106,7 @@ public class ControllerInvitados extends HttpServlet {
 
 		}
 		
-		dispatcher = request.getRequestDispatcher(Constantes.URI_SOCIOS);  
+		dispatcher = request.getRequestDispatcher(Constantes.URI_INVITADOS);  
 		if (dispatcher != null){  
 		  dispatcher.forward(request, response); 
 		}	

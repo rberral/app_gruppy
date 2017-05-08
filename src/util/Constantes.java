@@ -42,17 +42,20 @@ public final class Constantes {
 // Tienen que estar sincronizados con los definidos en los javascript de formularios	
 	public static final String FORM_JS_OPER_UPDATE = "update";
 	public static final String FORM_JS_OPER_DELETE = "delete";
-
+	public static final String FORM_JS_OPER_INSERT = "insert";
 	
 	
 	public static final String FORM_JS_OPER = "?oper";
 	public static final String FORM_JS_EMAIL = "email";
+	public static final String FORM_JS_IDENTIFICADOR = "identificador";
 	public static final String FORM_JS_EDIT_EMAIL = "editEmail";
 	public static final String FORM_JS_NOMBRE = "nombre"; 
 	public static final String FORM_JS_FUNDADOR = "fundador";
 	//public static final String FORM_JS_EDIT_FUNDADOR = "editFundador";
+	public static final String FORM_JS_FECHA = "fecha";
 	public static final String FORM_JS_FECHA_ALTA = "fechaAlta";
 	public static final String FORM_JS_ACTIVO = "activo";
+	public static final String FORM_JS_OBSERVACIONES = "observaciones";
 	//public static final String FORM_JS_EDIT_FECHA_ALTA = "editFechaAlta";
 	
 	

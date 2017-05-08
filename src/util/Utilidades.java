@@ -10,12 +10,20 @@ import java.util.StringTokenizer;
 // CLASE USADA PARA METODOS GENERALES
 public class Utilidades {
 
-	final static String WEB_FORMAT = "yyyy-MM-dd";
-	final static String BBDD_FORMAT = "yyyy-MM-dd";
+	final static String WEB_FORMAT_2 = "yyyy-MM-dd";
+	final static String WEB_FORMAT = "dd-MM-yyyy";
+	final static String BBDD_FORMAT_2 = "yyyy-MM-dd";
+	final static String BBDD_FORMAT = "dd-MM-yyyy";
 	
 	public static String getFechaToJSP(Date f){
-	DateFormat df = new java.text.SimpleDateFormat(WEB_FORMAT);
-	return df.format(f);
+		DateFormat df = new java.text.SimpleDateFormat(WEB_FORMAT);
+		return df.format(f);
+	}
+	
+	public static String getFechaActualToJSP(){
+		Date f = new Date();
+		DateFormat df = new java.text.SimpleDateFormat(WEB_FORMAT);
+		return df.format(f);
 	}
 	
 	public static Date getFechaToBBDD(String f){
@@ -88,5 +96,15 @@ public class Utilidades {
 			value = true;
 		}
 		return value;
+	}
+	
+	public static boolean checkDateInvitado(Date d){
+		Date fsistema = new Date();
+		if(d.compareTo(fsistema)< 0 || d.compareTo(fsistema)==0 ){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 }

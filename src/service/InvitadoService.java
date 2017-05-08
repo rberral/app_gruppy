@@ -49,5 +49,10 @@ public class InvitadoService implements IInvitadoService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+/*	public boolean removeInvitado(int id) {
+		// TODO Auto-generated method stub
+		return dao.removeInvitado(id);
+	}*/
 
 	}

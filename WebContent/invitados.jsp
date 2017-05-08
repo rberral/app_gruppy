@@ -221,7 +221,7 @@
 <thead>
 <tr> 
 <th tabindex="0" data-field="ColumnState" data-checkbox="true"></th> 
-<th data-field="ColumnId" data-sortable="true" readonly>Identificador</th>
+<th data-field="ColumnId" data-sortable="true" disabled>Identificador</th>
 <th data-field="ColumnNombre" data-sortable="true">Nombre</th>
 <th data-field="ColumnFecha" data-sortable="true">Fecha</th>
 <th data-field="ColumnObservaciones" data-sortable="true">Observaciones</th>
@@ -230,8 +230,9 @@
 	<%
 		for(int i = 0;i<listado_invitados.size();i++){
 			Invitado aux = listado_invitados.get(i);
-			%> <tr class="columnIdentificador" id="<%= aux.getIdInvitado() %>">
+			%> <tr>
 				<td></td>
+				<td class="columnId" id="<%= aux.getIdInvitado() %>" disabled><%= aux.getIdInvitado() %></td>
 				<td class="columnNombre"><%= aux.getNombreInvitado() %></td>
         		<td class="columnFecha"><%= Utilidades.getFechaToJSP(aux.getFechaInvitacion()) %></td>
         		<td class="columnObservaciones"><%= aux.getObservaciones() %></td>
@@ -253,15 +254,15 @@
               		identificador = listado_invitados.get(listado_invitados.size()-1).getIdInvitado();
               	}
               %>
-              <th data-field="Identificador" data-sortable="true">Identificador</th>
+              <th data-field="Id" data-sortable="true">Identificador</th>
               <th data-field="Nombre" data-sortable="true">Nombre</th>
               <th data-field="Fecha" data-sortable="true">Fecha</th> 
               <th data-field="Observaciones" data-sortable="true">Observaciones</th>
               </tr>
               <tr>
-                <td><input type="text" class="form-control" id="addIdentificador" value="<%= identificador %>" readonly/></td>
+                <td><input type="text" class="form-control" id="addId" value="<%= identificador %>" readonly/></td>
                 <td><input type="text" class="form-control" id="addNombre"/></td>
-                <td><input type="text" class="form-control" id="addFecha" type="date"/></td> 
+                <td><input type="date" class="form-control" id="addFecha" type="date" value="<%= Utilidades.getFechaActualToJSP() %>"/></td> 
                 <td><input type="text" class="form-control" id="addObservaciones"/></td>
               </tr>
             </thead>
@@ -276,15 +277,15 @@
         <table id="tableEdit" class="table table-bordered" >
             <thead>
               <tr> 
-              <th data-field="Identificador">Identificador</th> 
+              <th data-field="Id">Identificador</th> 
               <th data-field="Nombre">Nombre</th> 
               <th data-field="Fecha">Fecha</th>
               <th data-field="Observaciones">Observaciones</th>
               </tr>
               <tr>
-              <td><input type="text" class="form-control" id="editIdentificador"/></td>
+              <td><input type="text" class="form-control" id="editId"/></td>
              <td><input type="text" class="form-control" id="editNombre"/></td>
- 			<td><input  id="editFechaAlta" placeholder="DD/MM/AAAA" class="form-control"  type="date"></td>
+ 			 <td><input type="date" class="form-control" id="editFecha"/></td>
               <td><input type="text" class="form-control" id="editObservaciones"/></td> 
               </tr>
             </thead>

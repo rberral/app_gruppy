@@ -73,6 +73,7 @@ public class InvitadoDAO {
 		session.close();
 		return dev;
 	}
+	
 	public List<Invitado> listInvitados(){
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
