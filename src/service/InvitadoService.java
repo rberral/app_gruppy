@@ -1,5 +1,6 @@
 package service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -50,9 +51,14 @@ public class InvitadoService implements IInvitadoService{
 		return null;
 	}
 	
-/*	public boolean removeInvitado(int id) {
+	public List<Invitado> listInvitadosConfirmados(Persona p, Date fdesde, Date fhasta) {
 		// TODO Auto-generated method stub
-		return dao.removeInvitado(id);
-	}*/
+		return dao.listInvitadosConfirmados(p, fdesde, fhasta);
+	}
+	
+	public List<Invitado> listInvitadosPendientes(Persona p) {
+		// TODO Auto-generated method stub
+		return dao.listInvitadosPendientes(p);
+	}
 
 	}

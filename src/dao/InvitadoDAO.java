@@ -1,14 +1,18 @@
 package dao;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
+import util.Utilidades;
 import bean.Invitado;
 import bean.Persona;
 
@@ -92,6 +96,53 @@ public class InvitadoDAO {
 		//List<Persona> personaList = session.createQuery("from Persona").list();
 		Criteria criteria =  session.createCriteria(Invitado.class)
 				.add(Restrictions.eq("emailPersona", p.getEmail()));
+		List<Invitado> invitadoList = criteria.list();
+		session.close();
+		return invitadoList;	
+	}
+	
+	public List<Invitado> listInvitadosConfirmados(Persona p, Date fdesde, Date fhasta){
+		// TODO Auto-generated method stub
+	    Calendar cal = Calendar.getInstance();
+		int year = cal.getInstance().get(Calendar.YEAR);
+
+	    cal.setTime(new Date());
+	    cal.set( Calendar.HOUR_OF_DAY, 0);
+	    cal.set( Calendar.MINUTE, 0);
+	    cal.set( Calendar.SECOND, 0);
+	    cal.set( Calendar.MILLISECOND, 0);
+	    cal.set( Calendar.YEAR,year);
+		if(fdesde == null){
+			cal.set(Calendar.DAY_OF_MONTH,1);
+			cal.set(Calendar.MONTH,0);
+			fdesde = cal.getTime();
+		}
+		if(fhasta == null){
+			cal.set(Calendar.DAY_OF_MONTH,31);
+			cal.set(Calendar.MONTH,11);
+			fhasta = cal.getTime();
+		}
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		//List<Persona> list = session.createCriteria(Persona.class).list();
+		//List<Persona> personaList = session.createQuery("from Persona").list();
+		Criteria criteria =  session.createCriteria(Invitado.class)
+				.add(Restrictions.eq("emailPersona", p.getEmail()))
+				.add(Expression.between("fechaInvitacion", fdesde, fhasta));
+		List<Invitado> invitadoList = criteria.list();
+		session.close();
+		return invitadoList;	
+	}
+	
+	public List<Invitado> listInvitadosPendientes(Persona p){
+		// TODO Auto-generated method stub
+		Calendar cal = Calendar.getInstance();
+		Date fechaActual = cal.getTime();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		//List<Persona> list = session.createCriteria(Persona.class).list();
+		//List<Persona> personaList = session.createQuery("from Persona").list();
+		Criteria criteria =  session.createCriteria(Invitado.class)
+				.add(Restrictions.eq("emailPersona", p.getEmail()))
+				.add(Restrictions.ge("fechaInvitacion", fechaActual));
 		List<Invitado> invitadoList = criteria.list();
 		session.close();
 		return invitadoList;	

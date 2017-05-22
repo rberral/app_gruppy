@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@page import="bean.Invitado"%>
 <%@page import="service.InvitadoService"%>
 <%@page import="java.util.Map"%>
@@ -52,7 +53,8 @@
 <%
 	Persona p = (Persona)request.getSession().getAttribute(Constantes.sessionUsuario);
 	InvitadoService invitadoS = new InvitadoService();
-	List<Invitado> listado_invitados = invitadoS.listInvitados(p);
+	List<Invitado> listado_invitados = invitadoS.listInvitadosPendientes(p);
+	List<Invitado> listado_invitados_confirmados = invitadoS.listInvitadosConfirmados(p, null, null);
 	
 %>
 
@@ -205,6 +207,7 @@
   <div class="row">
 
   <div class="col-md-9" id="containerTable">
+  <div class="col-md-offset-5"><h3>Invitados pendientes</h3></div>
 	<div id="toolbar" class="btn-group">
     <button type="button" class="btn btn-default" id="btnAdd">
         <i class="glyphicon glyphicon-plus"></i>
@@ -314,7 +317,47 @@
     }
     %>
     </div>
-            </div>
+        <div class="row">
+
+
+
+<%
+	if(listado_invitados_confirmados.isEmpty()){
+		%><div class="caption"><h3>No has realizado invitaciones en este año, anímate! :)</h3></div><%
+	}
+	else{
+		%>
+		  <div class="col-md-9">
+		  <div class="col-md-offset-5"><h3>Invitados confirmados</h3></div>
+<table data-show-columns="true" data-unique-id="ColumnId" data-click-to-select="true" data-single-select="true" data-toggle="table" data-search="true" data-pagination="true">
+<thead>
+<tr> 
+<th data-field="ColumnId" data-sortable="true" disabled>Identificador</th>
+<th data-field="ColumnNombre" data-sortable="true">Nombre</th>
+<th data-field="ColumnFecha" data-sortable="true">Fecha</th>
+<th data-field="ColumnObservaciones" data-sortable="true">Observaciones</th>
+</tr>
+</thead><tbody>
+	<%
+		for(int i = 0;i<listado_invitados_confirmados.size();i++){
+			Invitado aux = listado_invitados_confirmados.get(i);
+			%> <tr>
+				<td class="columnId" id="<%= aux.getIdInvitado() %>" disabled><%= aux.getIdInvitado() %></td>
+				<td class="columnNombre"><%= aux.getNombreInvitado() %></td>
+        		<td class="columnFecha"><%= Utilidades.getFechaToJSP(aux.getFechaInvitacion()) %></td>
+        		<td class="columnObservaciones"><%= aux.getObservaciones() %></td>
+        		</tr>
+        <%
+		}
+	%>
+</tbody></table>
+    </div>		
+		<%
+	}
+%>
+
+  </div>
+  </div>
             <!-- /.container-fluid -->
 
         </div>
