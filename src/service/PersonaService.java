@@ -91,6 +91,11 @@ public class PersonaService implements IPersonaService {
 		return dao.listPersonas();
 	}
 
+	public String getNameSurnamePersona(int idPersona){
+		Persona p = new Persona();
+		p = dao.getPersona(idPersona);
+		return p.getNombre() + ' ' + p.getApellidos();
+	}
 	public boolean loginUser(HttpServletRequest request, String email,
 			String pass) {
 		boolean enc = false;
@@ -115,7 +120,7 @@ public class PersonaService implements IPersonaService {
 	}
 
 	public boolean checkLogin(HttpServletRequest request) {
-		if (request.getSession().getAttribute("user") == null) {
+		if (request.getSession().getAttribute(Constantes.sessionUsuario) == null) {
 			return false;
 		} else {
 			return true;

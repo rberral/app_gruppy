@@ -68,3 +68,8 @@ function checkFrmPublish(){
 	document.getElementById("publishCommentForm").submit();	
 	}
 }
+
+function callDesgloseCuentas(tipoCuota){
+	$("#option").val(tipoCuota);
+	document.getElementById("listadoDesgloseCuentas").submit();	
+}

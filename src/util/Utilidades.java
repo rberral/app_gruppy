@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
+
+import service.PersonaService;
 // CLASE USADA PARA METODOS GENERALES
 public class Utilidades {
 
@@ -106,5 +108,70 @@ public class Utilidades {
 		else{
 			return true;
 		}
+	}
+	
+	public static String getMes(int month){
+		String mes = "";
+		switch (month) {
+		case 1:
+			mes = "Enero";
+			break;
+		case 2:
+			mes = "Febrero";
+			break;
+		case 3:
+			mes = "Marzo";
+			break;
+		case 4:
+			mes = "Abril";
+			break;
+		case 5:
+			mes = "Mayo";
+			break;
+		case 6:
+			mes = "Junio";
+			break;
+		case 7:
+			mes = "Julio";
+			break;
+		case 8:
+			mes = "Agosto";
+			break;
+		case 9:
+			mes = "Septiembre";
+			break;
+		case 10:
+			mes = "Octubre";
+			break;
+		case 11:
+			mes = "Noviembre";
+			break;
+		case 12:
+			mes = "Diciembre";
+			break;			
+		default:
+			break;
+		}
+		return mes;
+	}
+	
+	public static String getTipoCuota(int tipoCuota){
+		String cuota = "";
+		switch (tipoCuota) {
+		case Constantes.TIPO_CUOTA_MENSUAL: cuota = "Mensual";
+			break;
+		case Constantes.TIPO_CUOTA_INVITADOS: cuota = "Invitado"; 
+			break;
+		case Constantes.TIPO_CUOTA_OTROS: cuota = "Otros";
+			break;
+		default:
+			break;
+		}
+		return cuota;
+	}
+	
+	public static String getNameSurname(int idPersona){
+		PersonaService p = new PersonaService();
+		return p.getNameSurnamePersona(idPersona);
 	}
 }

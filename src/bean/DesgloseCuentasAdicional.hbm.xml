@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 24-abr-2017 21:27:08 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 22-may-2017 22:53:39 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="bean.DesgloseCuentasAdicional" table="desglose_cuentas_adicional" catalog="proyecto_asociacion">
         <id name="idAdicional" type="java.lang.Integer">
@@ -17,11 +17,11 @@
         <property name="annoCuenta" type="int">
             <column name="anno_cuenta" not-null="true" />
         </property>
+        <property name="tipoCuota" type="int">
+            <column name="tipo_cuota" not-null="true" />
+        </property>
         <property name="cuotaAdicional" type="int">
             <column name="cuota_adicional" not-null="true" />
-        </property>
-        <property name="coste" type="int">
-            <column name="coste" not-null="true" />
         </property>
         <property name="pagado" type="boolean">
             <column name="pagado" not-null="true" />

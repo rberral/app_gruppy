@@ -103,4 +103,14 @@
     <servlet-name>ControllerInvitados</servlet-name>
     <url-pattern>/ControllerInvitados</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ControllerDesglose</display-name>
+    <servlet-name>ControllerDesglose</servlet-name>
+    <servlet-class>controller.ControllerDesglose</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControllerDesglose</servlet-name>
+    <url-pattern>/ControllerDesglose</url-pattern>
+  </servlet-mapping>
 </web-app>

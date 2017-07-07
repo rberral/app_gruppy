@@ -17,6 +17,11 @@ public final class Constantes {
 	// -------------------- PERMISO EDICION Y BORRADO DE SOCIOS (ROLES 1 y 2) -------------------- //
 	public static final int[] AUTH_UPDATE_DELETE_SOCIOS = {1,2};
 	
+	// -------------------- TIPOS DE CUOTA EN DESGLOSE DE CUENTAS
+	public static final int TIPO_CUOTA_OTROS = 2;
+	public static final int TIPO_CUOTA_INVITADOS = 1;
+	public static final int TIPO_CUOTA_MENSUAL = 0;
+	
 	// -------------------- URI's  -------------------- //	
 	public static final String URI_MAIN = "/main.jsp";
 	public static final String URI_INDEX = "/index.jsp";
@@ -25,6 +30,7 @@ public final class Constantes {
 	public static final String URI_SOCIOS = "/socios.jsp";
 	public static final String URI_TABLON = "/tablon.jsp";
 	public static final String URI_INVITADOS = "/invitados.jsp";
+	public static final String URI_DESGLOSE = "/desglose_cuentas.jsp";
 	
 
 	public static final String URI_OPER_LOGOUT = "logout";
@@ -36,7 +42,8 @@ public final class Constantes {
 // -------------------- FICHEROS MAESTROS XML -------------------- //
 	public static final String URLMaestroRolXML = "src/xml/RolesUsuario.xml";
 	
-	
+	// -------------------- MAPPING ROLES PARA PERMISOS -------------------- //
+	public static final int ROLE_TESORERO = 3; // Ver fichero de maetro ROL	
 	
 // -------------------- PARAMETROS FORMULARIOS -------------------- //	
 // Tienen que estar sincronizados con los definidos en los javascript de formularios	
@@ -62,5 +69,7 @@ public final class Constantes {
 	// -------------------- MAPPING VALORES BOOLEANOS -------------------- //
 	public static final String BOOLEAN_TRUE = "Si";
 	public static final String BOOLEAN_FALSE = "No";
+	
+
 	
 }

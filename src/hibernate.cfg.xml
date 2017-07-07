@@ -21,4 +21,3 @@
         <mapping resource="bean/Persona.hbm.xml" />
     </session-factory>
 </hibernate-configuration>
-  

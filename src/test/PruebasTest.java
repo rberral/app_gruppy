@@ -23,8 +23,11 @@ import org.xml.sax.SAXException;
 
 import com.sun.org.apache.xalan.internal.xsltc.dom.LoadDocument;
 
+import bean.DesgloseCuentas;
+import bean.DesgloseCuentasAdicional;
 import bean.Invitado;
 import bean.Persona;
+import dao.DesgloseCuentasDAO;
 import dao.PersonaDAO;
 import service.PersonaService;
 import util.Constantes;
@@ -80,6 +83,7 @@ public class PruebasTest {
 //		 System.out.println(d.toString());
 //
 //		
+		/*
 	    Calendar cal = Calendar.getInstance();
 	    cal.setTime(new Date());
 	    cal.set( Calendar.HOUR_OF_DAY, 0);
@@ -100,6 +104,13 @@ public class PruebasTest {
 				.add(Restrictions.between("fechaInvitacion", fechaActual, fechaNueva));
 		List<Invitado> invitadoList = criteria.list();
 		session.close();
+		*/
+		DesgloseCuentasDAO DesgloseDAO = new DesgloseCuentasDAO();
+		
+		List<DesgloseCuentasAdicional> listaDesgloseCAdicional= DesgloseDAO.listDesgloseAdicional(0,Constantes.TIPO_CUOTA_INVITADOS);
+		List<DesgloseCuentasAdicional> listDesgloseOtros = DesgloseDAO.listDesgloseAdicional(0,Constantes.TIPO_CUOTA_OTROS);
+		List<DesgloseCuentas> listDesgloseCuotas = DesgloseDAO.listDesgloseCuotas(0);
+
 	}
 	
 
