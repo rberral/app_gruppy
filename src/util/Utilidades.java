@@ -7,8 +7,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import bean.Invitado;
+import bean.Persona;
 import service.PersonaService;
+import sun.security.util.Length;
 // CLASE USADA PARA METODOS GENERALES
 public class Utilidades {
 
@@ -16,6 +21,8 @@ public class Utilidades {
 	final static String WEB_FORMAT = "dd-MM-yyyy";
 	final static String BBDD_FORMAT_2 = "yyyy-MM-dd";
 	final static String BBDD_FORMAT = "dd-MM-yyyy";
+	final static String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	final static String PATTERN_TEL = "^\\+?\\d{1,3}?[- .]?\\(?(?:\\d{2,3})\\)?[- .]?\\d\\d\\d[- .]?\\d\\d\\d\\d$";
 	
 	public static String getFechaToJSP(Date f){
 		DateFormat df = new java.text.SimpleDateFormat(WEB_FORMAT);
@@ -28,8 +35,15 @@ public class Utilidades {
 		return df.format(f);
 	}
 	
+	public static String getFechaToEditJSP(Date f){
+		DateFormat df = new java.text.SimpleDateFormat(WEB_FORMAT_2);
+		return df.format(f);
+	}
+	
+	
 	public static Date getFechaToBBDD(String f){
 		Date fecha = null;
+		if(isDateValid(f)){
 		SimpleDateFormat df = new SimpleDateFormat(BBDD_FORMAT);
 		try {
 			fecha = df.parse(f);
@@ -37,7 +51,20 @@ public class Utilidades {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		}
 		return fecha;
+	}
+	
+	public static boolean isDateValid(String date) 
+	{
+	        try {
+	            DateFormat df = new SimpleDateFormat(BBDD_FORMAT);
+	            df.setLenient(false);
+	            df.parse(date);
+	            return true;
+	        } catch (ParseException e) {
+	            return false;
+	        }
 	}
 	
 	//usado para convertir eliminar caracter especial de email y poder usarlo como identificador
@@ -174,4 +201,48 @@ public class Utilidades {
 		PersonaService p = new PersonaService();
 		return p.getNameSurnamePersona(idPersona);
 	}
+	
+	public static boolean validacionesPerfil(Persona p){
+		boolean dev = false;
+		if((p.getFechaAlta() != null)|| (p.getNombre() != "")
+				|| (p.getApellidos() != "") || (p.getPass() != "")
+				|| (Utilidades.isEmailValid(p.getEmail())) || (Utilidades.isTelefonoValid(p.getTelefono()))) {
+			dev = true;
+		}
+		return dev;
+	}
+	
+	public static boolean isEmailValid(String email ){
+		Pattern pattern	= Pattern.compile(PATTERN_EMAIL);
+		
+		Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+	}
+	
+	public static boolean isTelefonoValid(int telefono){
+		String tel = String.valueOf(telefono);
+		Pattern pattern	= Pattern.compile(PATTERN_TEL);
+		
+		Matcher matcher = pattern.matcher(tel);
+        return matcher.matches();
+	}
+	
+	public static boolean validaSocio(Persona p){
+		boolean dev = false;
+		if(p.getFechaAlta()!=null){
+			dev = true;
+		}
+		return dev;
+	}
+	
+	public static boolean validaInvitado(Invitado i){
+		boolean dev = false;
+		//identificador???
+		if((i.getNombreInvitado() != "") && (Utilidades.checkDateInvitado(i.getFechaInvitacion())) 
+			&& (i.getObservaciones()!="")){
+			dev = true;
+		}
+		return dev;
+	}
+	
 }

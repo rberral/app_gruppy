@@ -29,7 +29,9 @@
     <!-- Custom Fonts -->
     <link href="lib/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-
+    <!-- Main CSS -->
+    <link href="lib/main.css" rel="stylesheet">
+    
     <!-- jQuery -->
     <script src="lib/jquery/jquery.js"></script>
 
@@ -71,7 +73,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin</a>
+                <a class="navbar-brand" href="">SB Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -190,7 +192,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Dashboard <small>Statistics Overview</small>
+                            Tablón
                         </h1>
                         <ol class="breadcrumb">
                             <li>
@@ -204,13 +206,9 @@
                 </div>
                 <!-- /.row -->
 
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-3">Tablón Principal</h1>
-    <p class="lead">Esto es un tablón de publicación de noticias relevantes para la asociación.</p>
-  </div>
-</div>
-<div class="form-group col-sm-4 col-md-4">
+
+<div class="row col-sm-8 col-md-8 scroll_anuncio" style="margin-right: 15px;">
+<div class="form-group">
 <form method="post" action="ControllerTablon" id="publishCommentForm">
 <!-- Title -->
 <div class="form-group row">
@@ -250,18 +248,19 @@
     %>
     </div>
 </div>
-<div class="row col-sm-4 col-md-4">
-  <h1>Tablón</h1>
+
+
+
+
   <div class="row">
-  <div class="col-sm-12 col-md-12">
-    <div class="thumbnail">
+    <div class="thumbnail" style="border: #ddd0;">
     <%
 	if(listaAnuncios.isEmpty()){
-		%><div class="caption"><h3>Publica tu primer anuncio! :)</h3></div><%
+		%><div class="caption" id="box_tablon"><h3>Publica tu primer anuncio! :)</h3></div><%
 	}
     	for(int i=0;i<listaAnuncios.size();i++){
     		%>
-    		 <div class="caption">
+    		 <div class="caption" id="box_tablon">
     		 <h3><%= listaAnuncios.get(i).getAsunto() %></h3>
     		 <h4><b><i>Publicado por: <%= listaAnuncios.get(i).getEmailPersona() %></i></b></h4>
     		<p><%= listaAnuncios.get(i).getDescripcion() %>
@@ -270,22 +269,20 @@
     	}
     		%>
     </div>
-  </div>
 </div>
 </div>
 
-<div class="row col-sm-4 col-md-4">
+<div class="row col-sm-4 col-md-4 scroll_anuncio">
   <h1>Mis Anuncios</h1>
   <div class="row">
-  <div class="col-sm-12 col-md-12">
-    <div class="thumbnail">
+    <div class="thumbnail" style="border: #ddd0;">
     <%
     	if(listaMisAnuncios.isEmpty()){
-    		%><div class="caption"><h3>¡Publica tu primer anuncio! :)</h3></div><%
+    		%><div class="caption" id="box_tablon"><h3>¡Publica tu primer anuncio! :)</h3></div><%
     	}
     	for(int i=0;i<listaMisAnuncios.size();i++){
     		%>
-    		 <div class="caption">
+    		 <div class="caption" id="box_tablon">
     		 <h3><%= listaMisAnuncios.get(i).getAsunto() %></h3>
     		<p><%= listaMisAnuncios.get(i).getDescripcion() %>
       		</div>
@@ -293,7 +290,6 @@
     	}
     		%>
     </div>
-  </div>
 </div>
 </div>
 		

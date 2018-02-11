@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import util.HibernateUtil;
@@ -82,9 +83,10 @@ public class TablonAnunciosDAO {
 		List<TablonAnuncios> anunciosList = new ArrayList<TablonAnuncios>();
 		try{
 			session = HibernateUtil.getSessionFactory().openSession();
-			//anunciosList = session.createQuery("from tablon_anuncios").list();
-			Criteria criteria = session.createCriteria(TablonAnuncios.class);
+			Criteria criteria = session.createCriteria(TablonAnuncios.class)
+					.addOrder( Order.desc("idAnuncio"));	// ordenamos por mas recientes	
 			anunciosList = criteria.list();
+			
 		} catch (HibernateException e) {
 	        // TODO Auto-generated catch block
 	        e.printStackTrace();
@@ -113,7 +115,8 @@ public class TablonAnunciosDAO {
 		try{
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria criteria =  session.createCriteria(TablonAnuncios.class)
-				.add(Restrictions.eq("emailPersona",email ));
+				.add(Restrictions.eq("emailPersona",email ))
+				.addOrder( Order.desc("idAnuncio"));	// ordenamos por mas recientes	
 		anunciosList = criteria.list();
 		} catch (HibernateException e) {
 	        // TODO Auto-generated catch block

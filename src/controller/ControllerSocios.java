@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.Persona;
+import dao.PersonaDAO;
 import service.PersonaService;
 import util.Constantes;
 import util.Utilidades;
@@ -65,14 +67,28 @@ public class ControllerSocios extends HttpServlet {
 		
 		Map<String, String> mapa = new HashMap<String, String>();
 		mapa = Utilidades.getMapa(params);
+		oper = mapa.get(Constantes.FORM_JS_OPER);
 		email = mapa.get(Constantes.FORM_JS_EMAIL);
 		f_alta = Utilidades.getFechaToBBDD(mapa.get(Constantes.FORM_JS_FECHA_ALTA));
 		activo = Utilidades.getValueBooleanSelectToBBDD(mapa.get(Constantes.FORM_JS_ACTIVO));
-		oper = mapa.get(Constantes.FORM_JS_OPER);
-		if(oper.compareTo(Constantes.FORM_JS_OPER_UPDATE)==0){
-			fundador = Utilidades.getValueBooleanSelectToBBDD(mapa.get(Constantes.FORM_JS_FUNDADOR));			
-			tx=servicioP.updatePersonaSocio(email,fundador,f_alta, activo);
+		fundador = Utilidades.getValueBooleanSelectToBBDD(mapa.get(Constantes.FORM_JS_FUNDADOR));
+		
+		PersonaService ps = new PersonaService();
+		Persona p = ps.getPersona(email);
+		p.setActivo(activo);
+		//p.setEmail(email); NO PUEDE SER MODIFICABLE
+		p.setFundador(fundador);
+		p.setFechaAlta(f_alta);
+		
+		tx = Utilidades.validaSocio(p);
+
+		if(tx){
+			tx = false;
+			if(oper.compareTo(Constantes.FORM_JS_OPER_UPDATE)==0){
+				tx=servicioP.updatePersonaSocio(email,fundador,f_alta, activo);
+			}			
 		}
+
 //		else if(oper.compareTo(Constantes.FORM_JS_OPER_DELETE)==0){
 //			//No es necesario recoger valor de activo, ya que sabemos el tipo de operacion -> Delete
 //			tx=servicioP.updatePersonaActivo(email, false);

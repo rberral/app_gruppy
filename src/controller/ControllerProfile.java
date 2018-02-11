@@ -61,20 +61,27 @@ public class ControllerProfile extends HttpServlet {
 		//recogemos valores form
 		boolean tx = false;
 		Date f_nac = null;	
+		Persona p = null;
 		String first_name = request.getParameter("first_name");
 		String second_name = request.getParameter("second_name");
 		String pass = request.getParameter("password");
 		String email = request.getParameter("email");
 		String fecha_form = request.getParameter("fecha_nac");
-		f_nac = Utilidades.getFechaToBBDD(fecha_form);
 		int phone = Integer.parseInt(request.getParameter("phone"));
-		//realizamos de nuevo validaciones
+		f_nac = Utilidades.getFechaToBBDD(fecha_form);
+		
 		//recuperamos de la session el email anterior
 		Persona personaSession = (Persona) request.getSession().getAttribute(Constantes.sessionUsuario) ;
-		Persona p  = new Persona(email,pass,first_name,second_name,phone,f_nac, personaSession.getIdRol(), personaSession.isFundador(),personaSession.isActivo(), personaSession.getFechaAlta(), personaSession.getFechaBaja());
-
-		tx = servicioP.updatePersonaProfile(p, personaSession);
+		p  = new Persona(email,pass,first_name,second_name,phone,f_nac, personaSession.getIdRol(), personaSession.isFundador(),personaSession.isActivo(), personaSession.getFechaAlta(), personaSession.getFechaBaja());
+		//VALIDACIONES
+		tx = Utilidades.validacionesPerfil(p);
 		
+		if(tx){
+			//recuperamos de la session el email anterior
+			tx = false;
+			tx = servicioP.updatePersonaProfile(p, personaSession);	
+		}
+
 		if(tx){
 			//actualizamos valores sesion
 			servicioP.updateSessionUser(request, p);

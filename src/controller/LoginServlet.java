@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
 			// login correcto
 			//inicializamos variables globales
 			//inicializaVariables(request);
-			dispatcher = request.getRequestDispatcher(Constantes.URI_MAIN);
+			dispatcher = request.getRequestDispatcher(Constantes.URI_TABLON);
 			if (dispatcher != null) {
 				dispatcher.forward(request, response);
 			}

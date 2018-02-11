@@ -71,7 +71,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin</a>
+                <a class="navbar-brand" href="">SB Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -189,7 +189,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Dashboard <small>Statistics Overview</small>
+                            Socios <small>Datos Personales</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
@@ -321,7 +321,7 @@
      		
       }%>
      </select></td>
- <td><input  id="editFechaAlta" placeholder="AAAA/MM/DD" class="form-control"  type="date" value="<%= Utilidades.getFechaToJSP(p.getFechaAlta()) %>"></td>
+ <td><input  id="editFechaAlta" type="datetime" class="form-control" maxlength="10" value="<%= Utilidades.getFechaToJSP(p.getFechaAlta()) %>"/></td>
      
  
               </tr>

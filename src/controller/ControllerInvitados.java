@@ -76,8 +76,10 @@ public class ControllerInvitados extends HttpServlet {
 		observaciones = mapa.get(Constantes.FORM_JS_OBSERVACIONES);
 		oper = mapa.get(Constantes.FORM_JS_OPER);
 		Invitado i = new Invitado(email, f_alta, nombre, observaciones);
+		tx = Utilidades.validaInvitado(i);
 		//Realizamos validacion de fecha de invitado antes de seguir
-		if(Utilidades.checkDateInvitado(f_alta)){
+		if(tx){
+			tx = false;
 			if(oper.compareTo(Constantes.FORM_JS_OPER_UPDATE)==0){
 				i.setIdInvitado(Integer.parseInt(mapa.get(Constantes.FORM_JS_IDENTIFICADOR)));
 				tx=servicioI.updateInvitado(i);
@@ -90,9 +92,7 @@ public class ControllerInvitados extends HttpServlet {
 				tx=servicioI.addInvitado(i);
 			}
 		}
-		else{
-			tx = false;
-		}
+
 
 //		else if(oper.compareTo(Constantes.FORM_JS_OPER_DELETE)==0){
 //			//No es necesario recoger valor de activo, ya que sabemos el tipo de operacion -> Delete

@@ -14,6 +14,9 @@ public final class Constantes {
 	public static final String MSG_OK_UPDATE = "Operación realizada correctamente.";
 	public static final String MSG_ERROR_UPDATE = "Operación fallida, revise los campos.";
 
+	// -------------------- MAPPING ROLES PARA PERMISOS -------------------- //
+	public static final int ROLE_TESORERO = 3; // Ver fichero de maetro ROL	
+	
 	// -------------------- PERMISO EDICION Y BORRADO DE SOCIOS (ROLES 1 y 2) -------------------- //
 	public static final int[] AUTH_UPDATE_DELETE_SOCIOS = {1,2};
 	
@@ -23,7 +26,7 @@ public final class Constantes {
 	public static final int TIPO_CUOTA_MENSUAL = 0;
 	
 	// -------------------- URI's  -------------------- //	
-	public static final String URI_MAIN = "/main.jsp";
+	//public static final String URI_MAIN = "/main.jsp";
 	public static final String URI_INDEX = "/index.jsp";
 	public static final String URI_INFO_ASOC = "/info_asoc.jsp";
 	public static final String URI_MI_PERFIL = "/mi_perfil.jsp";
@@ -42,8 +45,6 @@ public final class Constantes {
 // -------------------- FICHEROS MAESTROS XML -------------------- //
 	public static final String URLMaestroRolXML = "src/xml/RolesUsuario.xml";
 	
-	// -------------------- MAPPING ROLES PARA PERMISOS -------------------- //
-	public static final int ROLE_TESORERO = 3; // Ver fichero de maetro ROL	
 	
 // -------------------- PARAMETROS FORMULARIOS -------------------- //	
 // Tienen que estar sincronizados con los definidos en los javascript de formularios	

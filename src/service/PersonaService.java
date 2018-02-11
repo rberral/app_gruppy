@@ -5,6 +5,7 @@ import java.util.List;
 //import java.util.logging.Logger;
 
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import bean.Persona;
 import service.PersonaService;
+import sun.misc.Perf.GetPerfAction;
 import util.Constantes;
 import dao.PersonaDAO;
 
@@ -72,6 +74,13 @@ public class PersonaService implements IPersonaService {
 		return dao.updatePersonaSocio(email,fundador, f_alta, activo);
 	}
 	
+	public Persona getPersona(String email){
+		return dao.getPersona(email);
+	}
+	
+	public Persona getPersona(int id){
+		return dao.getPersona(id);
+	}
 	//Se controla en update
 //	public boolean updatePersonaActivo(String email, boolean activo){
 //		return dao.updatePersonaActivo(email,activo);
