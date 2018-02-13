@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 22-may-2017 22:53:39 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 13-feb-2018 19:37:19 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="bean.TablonAnuncios" table="tablon_anuncios" catalog="proyecto_asociacion">
         <id name="idAnuncio" type="java.lang.Integer">
@@ -17,8 +17,11 @@
         <property name="descripcion" type="string">
             <column name="descripcion" length="65535" not-null="true" />
         </property>
-        <property name="activo" type="boolean">
-            <column name="activo" not-null="true" />
+        <property name="fechaCreate" type="date">
+            <column name="fecha_create" length="10" not-null="true" />
+        </property>
+        <property name="fechaDelete" type="date">
+            <column name="fecha_delete" length="10" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

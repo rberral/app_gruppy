@@ -71,6 +71,8 @@ public final class Constantes {
 	public static final String BOOLEAN_TRUE = "Si";
 	public static final String BOOLEAN_FALSE = "No";
 	
-
+	//--------------------- MAPPING DIAS INVITADOS ------------------------- //
+	public static final int INVITADO_DIAS_ALTA = 2;
+	public static final int INVITADO_DIAS_CONFIRMACION = -2;
 	
 }

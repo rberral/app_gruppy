@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="util.MaestroDatos"%>
 <%@page import="java.util.Map"%>
@@ -257,7 +258,7 @@
         		<td class="columnFecha"><%= Utilidades.getFechaToJSP(aux.getFechaNacimiento()) %></td>
         		<td class="columnRol"><%= Utilidades.getValueRol(aux.getIdRol()) %></td>
         		<td class="columnFundador"><%= Utilidades.getValueBooleanSelectToJSP(aux.isFundador()) %></td>
-        		<td class="columnActivo"><%= Utilidades.getValueBooleanSelectToJSP(aux.isActivo()) %></td>
+        		<td class="columnActivo"><%= Utilidades.getValueBooleanFechaDeleteToJSP(aux.getFechaBaja()) %></td>
         		<td class="columnFechaAlta"><%= Utilidades.getFechaToJSP(aux.getFechaAlta()) %></td>
         		<td class="columnFechaBaja"><%= Utilidades.getFechaToJSP(aux.getFechaBaja()) %></td>
         		</tr>
@@ -311,8 +312,8 @@
      
      iterator = listadoBooleanos.entrySet().iterator();
      while (iterator.hasNext()){	
-     	 Map.Entry<Boolean,String> entry = (Map.Entry<Boolean,String>) iterator.next();
-     	 	if(p.isActivo() == entry.getKey()){
+     	 Map.Entry<Date,String> entry = (Map.Entry<Date,String>) iterator.next();
+     	 	if(p.getFechaBaja() == entry.getKey()){
      	 		 %><option id="<%=entry.getKey() %>" selected><%=entry.getValue() %></option><%
      	 	}
      	 	else{

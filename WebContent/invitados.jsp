@@ -243,7 +243,9 @@
         <%
 		}
 	%>
-</tbody></table>
+</tbody>
+</table>
+<p>* Tanto para alta como actualización de invitado, la fecha de invitación debe ser a partir del día <b><%= Utilidades.getFechaToJSP(Utilidades.sumarRestarDiasFecha(new Date(), Constantes.INVITADO_DIAS_ALTA)) %></b>.</p>
     </div>
   </div>
 
@@ -265,7 +267,7 @@
               <tr>
                 <td><input type="text" class="form-control" id="addId" value="<%= identificador %>" readonly/></td>
                 <td><input type="text" class="form-control" id="addNombre"/></td>
-                <td><input type="date" class="form-control" id="addFecha" type="date" value="<%= Utilidades.getFechaActualToJSP() %>"/></td> 
+                <td><input type="datetime" class="form-control" id="addFecha" value="<%= Utilidades.getFechaActualToJSP() %>"/></td> 
                 <td><input type="text" class="form-control" id="addObservaciones"/></td>
               </tr>
             </thead>

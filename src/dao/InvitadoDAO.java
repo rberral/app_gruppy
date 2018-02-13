@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Restrictions;
 
+import util.Constantes;
 import util.HibernateUtil;
 import util.Utilidades;
 import bean.Invitado;
@@ -118,9 +119,11 @@ public class InvitadoDAO {
 			fdesde = cal.getTime();
 		}
 		if(fhasta == null){
-			cal.set(Calendar.DAY_OF_MONTH,31);
-			cal.set(Calendar.MONTH,11);
-			fhasta = cal.getTime();
+			//cal.set(Calendar.DAY_OF_MONTH,31);
+			//cal.set(Calendar.MONTH,11);
+			//fhasta = cal.getTime();
+			//Restamos X días a la fecha del sistema
+			fhasta = Utilidades.sumarRestarDiasFecha(new Date(),Constantes.INVITADO_DIAS_CONFIRMACION);
 		}
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		//List<Persona> list = session.createCriteria(Persona.class).list();

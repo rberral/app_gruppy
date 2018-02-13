@@ -3,16 +3,16 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 13-feb-2018 19:37:19 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="bean.LibroCuentas" table="libro_cuentas" catalog="proyecto_asociacion">
-        <id name="idLibro" type="java.lang.Integer">
-            <column name="id_libro" />
+    <class name="bean.Cuota" table="cuota" catalog="proyecto_asociacion">
+        <id name="idCuota" type="java.lang.Integer">
+            <column name="id_cuota" />
             <generator class="identity" />
         </id>
-        <property name="nombre" type="string">
-            <column name="nombre" length="50" not-null="true" />
+        <property name="tipoCuota" type="int">
+            <column name="tipo_cuota" not-null="true" />
         </property>
         <property name="descripcion" type="string">
-            <column name="descripcion" length="500" not-null="true" />
+            <column name="descripcion" length="65535" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

@@ -11,6 +11,7 @@ import org.w3c.dom.Element;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +50,14 @@ public class MaestroDatos {
 		listado = new HashMap<Boolean, String>();
 		listado.put(true, Constantes.BOOLEAN_TRUE);
 		listado.put(false,Constantes.BOOLEAN_FALSE);
+		
+		return listado;
+	}
+	
+	public static Map<Date, String> getBooleanValuesFechaFin(){
+		Map<Date, String> listado = null;
+		listado = new HashMap<Date, String>();
+		listado.put(Utilidades.getFechaFin(), Constantes.BOOLEAN_TRUE);
 		
 		return listado;
 	}

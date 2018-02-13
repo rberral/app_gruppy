@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import bean.TablonAnuncios;
 import service.PersonaService;
 import service.TablonService;
 import util.Constantes;
+import util.Utilidades;
 
 /**
  * Servlet implementation class ControllerTablon
@@ -53,7 +55,7 @@ public class ControllerTablon extends HttpServlet {
 		String descripcion = request.getParameter("descripcion");
 		//recuperamos de la session el email anterior
 		Persona personaSession = (Persona) request.getSession().getAttribute(Constantes.sessionUsuario) ;
-		TablonAnuncios t = new TablonAnuncios(personaSession.getEmail(), asunto, descripcion, true);
+		TablonAnuncios t = new TablonAnuncios(personaSession.getEmail(), asunto, descripcion, new Date(), Utilidades.getFechaFin());
 		
 		tx = servicioT.addAnuncio(t);
 		

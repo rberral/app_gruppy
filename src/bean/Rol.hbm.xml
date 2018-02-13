@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 22-may-2017 22:53:39 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 13-feb-2018 19:37:19 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="bean.Rol" table="rol" catalog="proyecto_asociacion">
         <id name="idRol" type="java.lang.Integer">
@@ -10,9 +10,6 @@
         </id>
         <property name="nombre" type="string">
             <column name="nombre" length="65535" not-null="true" />
-        </property>
-        <property name="autorizacionUrl" type="string">
-            <column name="autorizacion_url" length="100" not-null="true" />
         </property>
         <property name="activo" type="boolean">
             <column name="activo" not-null="true" />

@@ -3,6 +3,7 @@ package util;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,6 +54,19 @@ public class Utilidades {
 		}
 		}
 		return fecha;
+	}
+	
+	public static Date getFechaFin(){
+		 Calendar calendar = Calendar.getInstance();
+		 calendar.set( Calendar.HOUR_OF_DAY, 0);
+		 calendar.set( Calendar.MINUTE, 0);
+		 calendar.set( Calendar.SECOND, 0);
+		 calendar.set( Calendar.MILLISECOND, 0);
+		 calendar.set( Calendar.YEAR,9999);
+		 calendar.set( Calendar.MONTH, 11);
+		 calendar.set( Calendar.DATE, 31);
+		 //calendar.set(9999, 11, 31); //11 = Diciembre
+		 return calendar.getTime();
 	}
 	
 	public static boolean isDateValid(String date) 
@@ -111,6 +125,14 @@ public class Utilidades {
 		return listado.get(idRol);
 	}
 	
+	public static String getValueBooleanFechaDeleteToJSP(Date fecha_fin){
+		String val = Constantes.BOOLEAN_FALSE;
+		if(fecha_fin.compareTo(Utilidades.getFechaFin())==0){
+			val = Constantes.BOOLEAN_TRUE;
+		}
+		return val;
+		}
+	
 	public static String getValueBooleanSelectToJSP(boolean valor){
 		String val = Constantes.BOOLEAN_FALSE;
 		if(valor){
@@ -128,8 +150,8 @@ public class Utilidades {
 	}
 	
 	public static boolean checkDateInvitado(Date d){
-		Date fsistema = new Date();
-		if(d.compareTo(fsistema)< 0 || d.compareTo(fsistema)==0 ){
+		Date finvitado_alta = Utilidades.sumarRestarDiasFecha(new Date(), Constantes.INVITADO_DIAS_ALTA);
+		if(d.compareTo(finvitado_alta)< 0 || d.compareTo(finvitado_alta)==0 ){
 			return false;
 		}
 		else{
@@ -243,6 +265,13 @@ public class Utilidades {
 			dev = true;
 		}
 		return dev;
+	}
+	
+	 public static Date sumarRestarDiasFecha(Date fecha, int dias){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fecha); // Configuramos la fecha que se recibe
+		calendar.add(Calendar.DAY_OF_YEAR, dias);  // numero de días a añadir, o restar en caso de días<0
+		return calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
 	}
 	
 }

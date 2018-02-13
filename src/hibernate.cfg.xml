@@ -19,5 +19,6 @@
         <mapping resource="bean/LibroCuentas.hbm.xml" />
         <mapping resource="bean/DesgloseCuentas.hbm.xml" />
         <mapping resource="bean/Persona.hbm.xml" />
+        <mapping resource="bean/Cuota.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

@@ -75,7 +75,12 @@ public class ControllerSocios extends HttpServlet {
 		
 		PersonaService ps = new PersonaService();
 		Persona p = ps.getPersona(email);
-		p.setActivo(activo);
+		/*if(activo == false){
+			p.setFechaBaja(new Date());
+		}
+		else{
+			p.setFechaBaja(Utilidades.getFechaFin());
+		}*/
 		//p.setEmail(email); NO PUEDE SER MODIFICABLE
 		p.setFundador(fundador);
 		p.setFechaAlta(f_alta);

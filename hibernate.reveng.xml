@@ -24,5 +24,8 @@
 	<table-filter match-name="invitado"
 		match-catalog="proyecto_asociacion">
 	</table-filter>
+	<table-filter match-name="cuota"
+		match-catalog="proyecto_asociacion">
+	</table-filter>
 	<table catalog="proyecto_asociacion" name="persona"></table>
 </hibernate-reverse-engineering>

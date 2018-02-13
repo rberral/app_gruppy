@@ -149,7 +149,6 @@ public class PersonaDAO {
 		if(!(p==null)){
 		 p.setFundador(fundador);
 		 p.setFechaAlta(f_alta);
-		 p.setActivo(activo);
 		 // Si se marca como baja, actualizamos fecha de baja
 		 if(!activo){
 			 p.setFechaBaja(new Date());

@@ -1,6 +1,6 @@
 package bean;
 
-// Generated 22-may-2017 22:53:39 by Hibernate Tools 3.4.0.CR1
+// Generated 13-feb-2018 19:37:19 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -14,21 +14,29 @@ public class Invitado implements java.io.Serializable {
 	private Date fechaInvitacion;
 	private String nombreInvitado;
 	private String observaciones;
+	private Date fechaCreate;
+	private Date fechaDelete;
 
 	public Invitado() {
 	}
 
-	public Invitado(String emailPersona, Date fechaInvitacion) {
+	public Invitado(String emailPersona, Date fechaInvitacion,
+			Date fechaCreate, Date fechaDelete) {
 		this.emailPersona = emailPersona;
 		this.fechaInvitacion = fechaInvitacion;
+		this.fechaCreate = fechaCreate;
+		this.fechaDelete = fechaDelete;
+		
 	}
-
 	public Invitado(String emailPersona, Date fechaInvitacion,
-			String nombreInvitado, String observaciones) {
+			String nombreInvitado, String observaciones, Date fechaCreate,
+			Date fechaDelete) {
 		this.emailPersona = emailPersona;
 		this.fechaInvitacion = fechaInvitacion;
 		this.nombreInvitado = nombreInvitado;
 		this.observaciones = observaciones;
+		this.fechaCreate = fechaCreate;
+		this.fechaDelete = fechaDelete;
 	}
 
 	public Integer getIdInvitado() {
@@ -69,6 +77,22 @@ public class Invitado implements java.io.Serializable {
 
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
+	}
+
+	public Date getFechaCreate() {
+		return this.fechaCreate;
+	}
+
+	public void setFechaCreate(Date fechaCreate) {
+		this.fechaCreate = fechaCreate;
+	}
+
+	public Date getFechaDelete() {
+		return this.fechaDelete;
+	}
+
+	public void setFechaDelete(Date fechaDelete) {
+		this.fechaDelete = fechaDelete;
 	}
 
 }

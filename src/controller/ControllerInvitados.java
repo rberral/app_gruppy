@@ -75,7 +75,7 @@ public class ControllerInvitados extends HttpServlet {
 		nombre = mapa.get(Constantes.FORM_JS_NOMBRE);
 		observaciones = mapa.get(Constantes.FORM_JS_OBSERVACIONES);
 		oper = mapa.get(Constantes.FORM_JS_OPER);
-		Invitado i = new Invitado(email, f_alta, nombre, observaciones);
+		Invitado i = new Invitado(email, f_alta, nombre, observaciones, new Date(), Utilidades.getFechaFin());
 		tx = Utilidades.validaInvitado(i);
 		//Realizamos validacion de fecha de invitado antes de seguir
 		if(tx){

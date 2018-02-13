@@ -1,6 +1,6 @@
 package bean;
 
-// Generated 22-may-2017 22:53:39 by Hibernate Tools 3.4.0.CR1
+// Generated 13-feb-2018 19:37:19 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -18,7 +18,6 @@ public class Persona implements java.io.Serializable {
 	private Date fechaNacimiento;
 	private int idRol;
 	private boolean fundador;
-	private boolean activo;
 	private Date fechaAlta;
 	private Date fechaBaja;
 
@@ -27,7 +26,7 @@ public class Persona implements java.io.Serializable {
 
 	public Persona(String email, String pass, String nombre, String apellidos,
 			int telefono, Date fechaNacimiento, int idRol, boolean fundador,
-			boolean activo, Date fechaAlta, Date fechaBaja) {
+			Date fechaAlta, Date fechaBaja) {
 		this.email = email;
 		this.pass = pass;
 		this.nombre = nombre;
@@ -36,7 +35,6 @@ public class Persona implements java.io.Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 		this.idRol = idRol;
 		this.fundador = fundador;
-		this.activo = activo;
 		this.fechaAlta = fechaAlta;
 		this.fechaBaja = fechaBaja;
 	}
@@ -111,14 +109,6 @@ public class Persona implements java.io.Serializable {
 
 	public void setFundador(boolean fundador) {
 		this.fundador = fundador;
-	}
-
-	public boolean isActivo() {
-		return this.activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
 	}
 
 	public Date getFechaAlta() {

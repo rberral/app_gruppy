@@ -72,7 +72,7 @@ public class ControllerProfile extends HttpServlet {
 		
 		//recuperamos de la session el email anterior
 		Persona personaSession = (Persona) request.getSession().getAttribute(Constantes.sessionUsuario) ;
-		p  = new Persona(email,pass,first_name,second_name,phone,f_nac, personaSession.getIdRol(), personaSession.isFundador(),personaSession.isActivo(), personaSession.getFechaAlta(), personaSession.getFechaBaja());
+		p  = new Persona(email,pass,first_name,second_name,phone,f_nac, personaSession.getIdRol(), personaSession.isFundador(), personaSession.getFechaAlta(), personaSession.getFechaBaja());
 		//VALIDACIONES
 		tx = Utilidades.validacionesPerfil(p);
 		
