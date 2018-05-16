@@ -65,14 +65,15 @@ public class ControllerProfile extends HttpServlet {
 		String first_name = request.getParameter("first_name");
 		String second_name = request.getParameter("second_name");
 		String pass = request.getParameter("password");
-		String email = request.getParameter("email");
+		//Desactivamos la actualizacion de email
+		//String email = request.getParameter("email");
 		String fecha_form = request.getParameter("fecha_nac");
 		int phone = Integer.parseInt(request.getParameter("phone"));
 		f_nac = Utilidades.getFechaToBBDD(fecha_form);
 		
 		//recuperamos de la session el email anterior
 		Persona personaSession = (Persona) request.getSession().getAttribute(Constantes.sessionUsuario) ;
-		p  = new Persona(email,pass,first_name,second_name,phone,f_nac, personaSession.getIdRol(), personaSession.isFundador(), personaSession.getFechaAlta(), personaSession.getFechaBaja());
+		p  = new Persona(personaSession.getEmail(),pass,first_name,second_name,phone,f_nac, personaSession.getIdRol(), personaSession.isFundador(), personaSession.getFechaAlta(), personaSession.getFechaBaja());
 		//VALIDACIONES
 		tx = Utilidades.validacionesPerfil(p);
 		

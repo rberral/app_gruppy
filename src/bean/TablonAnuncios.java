@@ -10,7 +10,7 @@ import java.util.Date;
 public class TablonAnuncios implements java.io.Serializable {
 
 	private Integer idAnuncio;
-	private String emailPersona;
+	private String email;
 	private String asunto;
 	private String descripcion;
 	private Date fechaCreate;
@@ -19,9 +19,9 @@ public class TablonAnuncios implements java.io.Serializable {
 	public TablonAnuncios() {
 	}
 
-	public TablonAnuncios(String emailPersona, String asunto,
+	public TablonAnuncios(String email, String asunto,
 			String descripcion, Date fechaCreate, Date fechaDelete) {
-		this.emailPersona = emailPersona;
+		this.email = email;
 		this.asunto = asunto;
 		this.descripcion = descripcion;
 		this.fechaCreate = fechaCreate;
@@ -35,13 +35,13 @@ public class TablonAnuncios implements java.io.Serializable {
 	public void setIdAnuncio(Integer idAnuncio) {
 		this.idAnuncio = idAnuncio;
 	}
-
+	
 	public String getEmailPersona() {
-		return this.emailPersona;
+		return this.email;
 	}
 
 	public void setEmailPersona(String emailPersona) {
-		this.emailPersona = emailPersona;
+		this.email = emailPersona;
 	}
 
 	public String getAsunto() {

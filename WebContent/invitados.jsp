@@ -245,7 +245,7 @@
 	%>
 </tbody>
 </table>
-<p>* Tanto para alta como actualización de invitado, la fecha de invitación debe ser a partir del día <b><%= Utilidades.getFechaToJSP(Utilidades.sumarRestarDiasFecha(new Date(), Constantes.INVITADO_DIAS_ALTA)) %></b>.</p>
+<p>* Tanto para alta como actualización de invitado, la fecha de invitación debe ser superior al día <b><%= Utilidades.getFechaToJSP(Utilidades.sumarRestarDiasFecha(new Date(), Constantes.INVITADO_DIAS_ALTA)) %></b>.</p>
     </div>
   </div>
 
@@ -352,13 +352,15 @@
         <%
 		}
 	%>
-</tbody></table>
+</tbody>
+</table>
     </div>		
 		<%
 	}
 %>
 
   </div>
+  <p>* Los invitados quedan confirmados de forma automática faltando 2 días para la fecha de invitación.</p>
   </div>
             <!-- /.container-fluid -->
 

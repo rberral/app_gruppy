@@ -9,6 +9,9 @@ import java.util.Date;
  */
 public class Persona implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
 	private Integer idPersona;
 	private String email;
 	private String pass;
