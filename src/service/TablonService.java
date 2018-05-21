@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import dao.AsociacionDAO;
 import dao.TablonAnunciosDAO;
+import bean.Persona;
 import bean.TablonAnuncios;
 
 public class TablonService implements ITablonService{
@@ -43,8 +44,8 @@ public class TablonService implements ITablonService{
 		return TablonDAO.getAnuncio(id);
 	}
 	
-	public List<TablonAnuncios> listAnunciosPersona(String email){
-		return TablonDAO.listAnunciosPersona(email);
+	public List<TablonAnuncios> listAnunciosPersona(Persona p){
+		return TablonDAO.listAnunciosPersona(p);
 	}
 	
 

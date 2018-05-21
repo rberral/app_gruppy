@@ -1,6 +1,6 @@
 package bean;
 
-// Generated 13-feb-2018 19:37:19 by Hibernate Tools 3.4.0.CR1
+// Generated 21-may-2018 21:52:38 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -10,7 +10,7 @@ import java.util.Date;
 public class Invitado implements java.io.Serializable {
 
 	private Integer idInvitado;
-	private String emailPersona;
+	private int idPersona;
 	private Date fechaInvitacion;
 	private String nombreInvitado;
 	private String observaciones;
@@ -20,18 +20,17 @@ public class Invitado implements java.io.Serializable {
 	public Invitado() {
 	}
 
-	public Invitado(String emailPersona, Date fechaInvitacion,
-			Date fechaCreate, Date fechaDelete) {
-		this.emailPersona = emailPersona;
+	public Invitado(int idPersona, Date fechaInvitacion, Date fechaCreate,
+			Date fechaDelete) {
+		this.idPersona = idPersona;
 		this.fechaInvitacion = fechaInvitacion;
 		this.fechaCreate = fechaCreate;
 		this.fechaDelete = fechaDelete;
-		
 	}
-	public Invitado(String emailPersona, Date fechaInvitacion,
-			String nombreInvitado, String observaciones, Date fechaCreate,
-			Date fechaDelete) {
-		this.emailPersona = emailPersona;
+
+	public Invitado(int idPersona, Date fechaInvitacion, String nombreInvitado,
+			String observaciones, Date fechaCreate, Date fechaDelete) {
+		this.idPersona = idPersona;
 		this.fechaInvitacion = fechaInvitacion;
 		this.nombreInvitado = nombreInvitado;
 		this.observaciones = observaciones;
@@ -47,12 +46,12 @@ public class Invitado implements java.io.Serializable {
 		this.idInvitado = idInvitado;
 	}
 
-	public String getEmailPersona() {
-		return this.emailPersona;
+	public int getIdPersona() {
+		return this.idPersona;
 	}
 
-	public void setEmailPersona(String emailPersona) {
-		this.emailPersona = emailPersona;
+	public void setIdPersona(int idPersona) {
+		this.idPersona = idPersona;
 	}
 
 	public Date getFechaInvitacion() {

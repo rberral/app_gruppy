@@ -70,12 +70,12 @@ public class ControllerInvitados extends HttpServlet {
 		Map<String, String> mapa = new HashMap<String, String>();
 		mapa = Utilidades.getMapa(params);
 		Persona p = (Persona)request.getSession().getAttribute(Constantes.sessionUsuario);
-		email = p.getEmail();
+		//email = p.getEmail();
 		f_alta = Utilidades.getFechaToBBDD(mapa.get(Constantes.FORM_JS_FECHA));
 		nombre = mapa.get(Constantes.FORM_JS_NOMBRE);
 		observaciones = mapa.get(Constantes.FORM_JS_OBSERVACIONES);
 		oper = mapa.get(Constantes.FORM_JS_OPER);
-		Invitado i = new Invitado(email, f_alta, nombre, observaciones, new Date(), Utilidades.getFechaFin());
+		Invitado i = new Invitado(p.getIdPersona(), f_alta, nombre, observaciones, new Date(), Utilidades.getFechaFin());
 		tx = Utilidades.validaInvitado(i);
 		//Realizamos validacion de fecha de invitado antes de seguir
 		if(tx){

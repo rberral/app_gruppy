@@ -55,7 +55,7 @@ public class ControllerTablon extends HttpServlet {
 		String descripcion = request.getParameter("descripcion");
 		//recuperamos de la session el email anterior
 		Persona personaSession = (Persona) request.getSession().getAttribute(Constantes.sessionUsuario) ;
-		TablonAnuncios t = new TablonAnuncios(personaSession.getEmail(), asunto, descripcion, new Date(), Utilidades.getFechaFin());
+		TablonAnuncios t = new TablonAnuncios(personaSession, asunto, descripcion, new Date(), Utilidades.getFechaFin());
 		
 		tx = servicioT.addAnuncio(t);
 		

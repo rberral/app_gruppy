@@ -1,6 +1,6 @@
 package bean;
 
-// Generated 13-feb-2018 19:37:19 by Hibernate Tools 3.4.0.CR1
+// Generated 21-may-2018 21:52:38 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -9,9 +9,6 @@ import java.util.Date;
  */
 public class Persona implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
 	private Integer idPersona;
 	private String email;
 	private String pass;
@@ -128,6 +125,10 @@ public class Persona implements java.io.Serializable {
 
 	public void setFechaBaja(Date fechaBaja) {
 		this.fechaBaja = fechaBaja;
+	}
+	
+	public String getNameSurname(){
+		return this.nombre + ' ' + this.apellidos;
 	}
 
 }

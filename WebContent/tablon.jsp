@@ -57,7 +57,7 @@
 	Persona p = (Persona)request.getSession().getAttribute("user");
 	TablonService tablonS = new TablonService();
 	List<TablonAnuncios> listaAnuncios = tablonS.listAnuncios();
-	List<TablonAnuncios> listaMisAnuncios = tablonS.listAnunciosPersona(p.getEmail());
+	List<TablonAnuncios> listaMisAnuncios = tablonS.listAnunciosPersona(p);
 	
 	
 %>
@@ -262,7 +262,7 @@
     		%>
     		 <div class="caption" id="box_tablon">
     		 <h3><%= listaAnuncios.get(i).getAsunto() %></h3>
-    		 <h4><b><i>Publicado por: <%= listaAnuncios.get(i).getEmailPersona() %></i></b></h4>
+    		 <h4><b><i>Publicado por: <%= listaAnuncios.get(i).getPersona().getNameSurname() %></i></b></h4>
     		<p><%= listaAnuncios.get(i).getDescripcion() %>
       		</div>
     		<%   	

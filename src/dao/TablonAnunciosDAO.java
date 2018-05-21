@@ -108,14 +108,14 @@ public class TablonAnunciosDAO {
 			return t;
 		}
 	
-	public List<TablonAnuncios> listAnunciosPersona(String email) {
+	public List<TablonAnuncios> listAnunciosPersona(Persona p) {
 		// TODO Auto-generated method stub
 		Session session = null;
 		List<TablonAnuncios> anunciosList = new ArrayList<TablonAnuncios>();
 		try{
 		session = HibernateUtil.getSessionFactory().openSession();
 		Criteria criteria =  session.createCriteria(TablonAnuncios.class)
-				.add(Restrictions.eq("emailPersona",email ))
+				.add(Restrictions.eq("idPersona",p.getIdPersona() ))
 				.addOrder( Order.desc("idAnuncio"));	// ordenamos por mas recientes	
 		anunciosList = criteria.list();
 		} catch (HibernateException e) {
